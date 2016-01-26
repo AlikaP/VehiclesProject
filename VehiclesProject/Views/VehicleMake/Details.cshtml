@@ -1,0 +1,100 @@
+﻿@model VehiclesProject.Models.VehicleMake
+
+@{
+    ViewBag.Title = "Details";
+}
+<br />
+<h2>Details</h2>
+
+<div>
+    <h4>Vehicle Make</h4>
+    <hr />
+               
+    <dl class="dl-horizontal">
+        
+          
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Abrev)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Abrev)
+        </dd>
+
+        <dd>
+            <br />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleModels)
+        </dt>
+
+        @if (ViewBag.NumItems != 0)
+        {
+             
+            <dd>
+                          
+                <table class="table">
+                    <tr>
+                        <th>Number of vehicle models: @ViewBag.NumItems   </th>
+                    </tr>                  
+                                       
+                    <tr>
+                        <th>Model Name</th>
+                        <th>Model Abrevation</th>
+                        <td>
+                            <p>
+                                @Html.ActionLink("Create New Model", "Create", "VehicleModel", new { id = @Model.Id }, null)
+                            </p>
+                        </td>
+                    </tr>
+                    @foreach (var item in Model.VehicleModels)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Abrev)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "VehicleModel", new { id = item.Id }, null) |
+                                @Html.ActionLink("Details", "Details", "VehicleModel", new { id = item.Id }, null) |
+                                @Html.ActionLink("Delete", "Delete", "VehicleModel", new { id = item.Id, makeId = item.MakeId }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                <p>
+                    There are currently no models for this vehicle make
+                </p>
+                <p>
+                    @Html.ActionLink("Create New Model", "Create", "VehicleModel", new { id = @Model.Id }, null)
+                </p>
+            </dd>
+        }
+        
+
+
+    </dl>
+
+
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
