@@ -7,7 +7,7 @@ using VehiclesProject.Models;
 
 namespace VehiclesProject.Data
 {
-    public class VehicleInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<VehicleContext>
+    public class VehicleInitializer : System.Data.Entity.DropCreateDatabaseAlways<VehicleContext>
     {
         protected override void Seed(VehicleContext context)
         {         
