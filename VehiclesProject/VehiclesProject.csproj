@@ -144,10 +144,17 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VehicleMakeController.cs" />
     <Compile Include="Controllers\VehicleModelController.cs" />
+    <Compile Include="Custom\Filtering.cs" />
     <Compile Include="Data\GenericRepository.cs" />
+    <Compile Include="Custom\IFiltering.cs" />
     <Compile Include="Data\IGenericRepository.cs" />
+    <Compile Include="Custom\IPaging.cs" />
+    <Compile Include="Custom\ISorting.cs" />
     <Compile Include="Data\IVehicleMakeRepository.cs" />
     <Compile Include="Data\IVehicleModelRepository.cs" />
+    <Compile Include="Custom\Paging.cs" />
+    <Compile Include="Custom\Sorting.cs" />
+    <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="Data\VehicleMakeRepository.cs" />
     <Compile Include="Data\VehicleContext.cs" />
     <Compile Include="Data\VehicleInitializer.cs" />

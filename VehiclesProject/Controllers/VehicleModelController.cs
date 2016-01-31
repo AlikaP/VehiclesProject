@@ -13,21 +13,8 @@ namespace VehiclesProject.Controllers
 {
     public class VehicleModelController : Controller
     {
-        private VehicleContext context = new VehicleContext();
-
-        private IVehicleModelRepository modelRepository;
-
-        public VehicleModelController()
-        {
-            this.modelRepository = new VehicleModelRepository(new VehicleContext());
-        }
-
-        //potencijalno testiranje
-        public VehicleModelController(IVehicleModelRepository modelRepository)
-        {
-            this.modelRepository = modelRepository;
-        }
-
+       
+        private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: VehicleModels/Details/id
         public ActionResult Details(int? id)
@@ -39,7 +26,7 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                var vehicleModel = modelRepository.GetSingle(id, "Make");
+                var vehicleModel = unitOfWork.VehicleModelRepository.GetSingleModel(id, "Make");
 
                 if (vehicleModel == null)
                 {
@@ -72,8 +59,8 @@ namespace VehiclesProject.Controllers
             }
 
             try
-            {                
-                modelRepository.Create(model, id);
+            {
+                unitOfWork.VehicleModelRepository.Create(model, id);
 
                 return RedirectToAction("Details", "VehicleMake", new { id });
             }
@@ -87,13 +74,14 @@ namespace VehiclesProject.Controllers
         // GET: VehicleModels/Edit/id
         [HttpGet]
         public ActionResult Edit(int? id)
-        {            
+        {   
+                     
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = modelRepository.GetSingle(id, null);
+            var make = unitOfWork.VehicleModelRepository.GetSingleModel(id, null);
 
             if (make == null)
             {
@@ -114,10 +102,10 @@ namespace VehiclesProject.Controllers
             }
 
             try
-            {                
-                modelRepository.Edit(id, model);
+            {
+                unitOfWork.VehicleModelRepository.Edit(id, model);
                 
-                var vehicleModel = modelRepository.GetSingle(id, null);     
+                var vehicleModel = unitOfWork.VehicleModelRepository.GetSingleModel(id, null);     
 
                 return RedirectToAction("Details", "VehicleMake", new { id = vehicleModel.MakeId });
             }
@@ -139,7 +127,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = modelRepository.GetSingle(id, null);
+            var make = unitOfWork.VehicleModelRepository.GetSingleModel(id, null);
 
             if (make == null)
             {
@@ -155,8 +143,8 @@ namespace VehiclesProject.Controllers
         public ActionResult DeleteConfirmed(int? id, int makeId)
         {            
             try
-            {                
-                modelRepository.Delete(id);
+            {
+                unitOfWork.VehicleModelRepository.Delete(id);
                                 
                 return RedirectToAction("Details", "VehicleMake", new { id = makeId });
             }
@@ -164,6 +152,12 @@ namespace VehiclesProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
 
     }

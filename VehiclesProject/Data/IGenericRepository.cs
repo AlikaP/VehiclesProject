@@ -1,19 +1,22 @@
 ﻿using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VehiclesProject.Models;
 
 namespace VehiclesProject.Data
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository //<T> where T : class
     {
         
-        T GetSingle(int? id, string property);
-        void Edit(int? id, T updatedItem);
-        void Create(T model);
-        void Delete(int? id);
-        IPagedList<T> GetPagedList(IQueryable<T> filteredModel, int pageNumber, int pageSize);
+        //T GetSingle<T>(int? id, string property) where T : class;
+        void Edit<T>(T item, T updatedItem) where T : class;
+        void Create<T>(T model) where T : class;
+        void Delete<T>(T item) where T : class;
+        IPagedList<T> GetPagedList<T>(IOrderedEnumerable<T> model, int pageSize, int pageNumber) where T : class; //, IVehicle;
+        
     }
 }

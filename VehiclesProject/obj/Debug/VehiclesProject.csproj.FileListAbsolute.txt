@@ -42,9 +42,9 @@ c:\users\alen\documents\visual studio 2015\Projects\VehiclesProject\VehiclesProj
 c:\users\alen\documents\visual studio 2015\Projects\VehiclesProject\VehiclesProject\obj\Debug\VehiclesProject.pdb
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\AutoMapper.dll
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\AutoMapper.xml
-C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\obj\Debug\VehiclesProject.csprojResolveAssemblyReference.cache
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.dll.config
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\PagedList.dll
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\PagedList.Mvc.dll
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\PagedList.xml
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\PagedList.Mvc.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\obj\Debug\VehiclesProject.csprojResolveAssemblyReference.cache

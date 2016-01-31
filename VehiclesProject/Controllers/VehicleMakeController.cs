@@ -16,58 +16,25 @@ namespace VehiclesProject.Controllers
 {
     public class VehicleMakeController : Controller
     {
-        private VehicleContext context = new VehicleContext();
-
-        private IVehicleMakeRepository makeRepository;
-
-        public VehicleMakeController()
-        {
-            this.makeRepository = new VehicleMakeRepository(new VehicleContext());
-        }
-
-        //potencijalno testiranje
-        public VehicleMakeController(IVehicleMakeRepository makeRepository)
-        {
-            this.makeRepository = makeRepository;
-        }
-
+        UnitOfWork unitOfWork = new UnitOfWork();
+        
 
         // GET: VehicleMakes
         public  ActionResult Index(string currentFilter, string searchString, int? page)
         {           
             try
             {
-                //count
-                ViewBag.NumItems = context.VehicleMakes.Count();
 
-                //search
-                var vehicleMakes = from m in context.VehicleMakes select m;
-
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    vehicleMakes = vehicleMakes.Where(m => m.Name == searchString
-                                           || m.Abrev == searchString
-                                           || m.VehicleModels.Count(s => s.Name == searchString) > 0);
-                }
-
-                //paging
-                if (searchString != null)
-                {
-                    page = 1;
-                }
-                else
-                {
-                    searchString = currentFilter;
-                }
-
+               
+                ViewBag.NumItems = unitOfWork.VehicleMakeRepository.GetItemNum();
+                
                 ViewBag.CurrentFilter = searchString;
 
-                int pageSize = 5;
-                int pageNumber = (page ?? 1);
-
-                var make = makeRepository.GetPagedList(vehicleMakes, pageNumber, pageSize);
+               
+                IPagedList<VehicleMake> model = unitOfWork.VehicleMakeRepository.GetMakes(currentFilter, searchString, page);
+               
                 
-                return View(make);
+                return View(model);
             }
             catch (Exception)
             {
@@ -85,7 +52,7 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                var vehicleMake = makeRepository.GetSingle(id, "VehicleModels");
+                var vehicleMake = unitOfWork.VehicleMakeRepository.GetSingleMake(id, "VehicleModels");
                 ViewBag.NumItems = vehicleMake.VehicleModels.Count();
 
                 if (vehicleMake == null)
@@ -120,7 +87,7 @@ namespace VehiclesProject.Controllers
 
             try
             {                
-                makeRepository.Create(model);
+                unitOfWork.VehicleMakeRepository.Create(model);
 
                 return RedirectToAction("index");
             }
@@ -140,7 +107,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = makeRepository.GetSingle(id, null);
+            var make = unitOfWork.VehicleMakeRepository.GetSingleMake(id, null);
 
             if (make == null)
             {
@@ -163,7 +130,7 @@ namespace VehiclesProject.Controllers
             try
             {
                                
-                makeRepository.Edit(id, model);
+                unitOfWork.VehicleMakeRepository.Edit(id, model);
 
                 return RedirectToAction("index");
             }
@@ -185,7 +152,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = makeRepository.GetSingle(id, null);
+            var make = unitOfWork.VehicleMakeRepository.GetSingleMake(id, null);
 
             if (make == null)
             {
@@ -202,7 +169,7 @@ namespace VehiclesProject.Controllers
         {            
             try
             {                
-                makeRepository.Delete(id);
+                unitOfWork.VehicleMakeRepository.Delete(id);
 
                 return RedirectToAction("index");
             }
