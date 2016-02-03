@@ -10,6 +10,8 @@ namespace VehiclesProject.Custom
 {
     public interface IFiltering
     {
-       IQueryable<VehicleMake> SearchMake(VehicleContext context, string searchString);
+        //IQueryable<VehicleMake> SearchMake(VehicleContext context, string searchString);
+      
+
     }
 }

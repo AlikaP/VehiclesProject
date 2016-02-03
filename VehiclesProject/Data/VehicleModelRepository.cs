@@ -10,12 +10,13 @@ namespace VehiclesProject.Data
     public class VehicleModelRepository  : IVehicleModelRepository
     {
               
-        private VehicleContext context;
+        //private VehicleContext context;
         private IGenericRepository genericRepository;
+        private VehicleContext context = new VehicleContext();
 
-        public VehicleModelRepository(VehicleContext context)
+        public VehicleModelRepository()
         {
-            this.context = context;
+            //this.context = context;
             this.genericRepository = new GenericRepository(context);
         }
 

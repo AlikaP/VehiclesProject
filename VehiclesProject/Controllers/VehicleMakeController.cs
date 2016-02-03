@@ -16,22 +16,22 @@ namespace VehiclesProject.Controllers
 {
     public class VehicleMakeController : Controller
     {
-        UnitOfWork unitOfWork = new UnitOfWork();
-        
+        //UnitOfWork unitOfWork = new UnitOfWork();
+
+        IVehicleMakeRepository vehicleMakeRepository = new VehicleMakeRepository();
 
         // GET: VehicleMakes
         public  ActionResult Index(string currentFilter, string searchString, int? page)
         {           
             try
             {
-
                
-                ViewBag.NumItems = unitOfWork.VehicleMakeRepository.GetItemNum();
+                ViewBag.NumItems = vehicleMakeRepository.GetItemNum();
                 
                 ViewBag.CurrentFilter = searchString;
 
                
-                IPagedList<VehicleMake> model = unitOfWork.VehicleMakeRepository.GetMakes(currentFilter, searchString, page);
+                var model = vehicleMakeRepository.GetMakes(currentFilter, searchString, page);
                
                 
                 return View(model);
@@ -52,7 +52,7 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                var vehicleMake = unitOfWork.VehicleMakeRepository.GetSingleMake(id, "VehicleModels");
+                var vehicleMake = vehicleMakeRepository.GetSingleMake(id, "VehicleModels");
                 ViewBag.NumItems = vehicleMake.VehicleModels.Count();
 
                 if (vehicleMake == null)
@@ -87,7 +87,7 @@ namespace VehiclesProject.Controllers
 
             try
             {                
-                unitOfWork.VehicleMakeRepository.Create(model);
+                vehicleMakeRepository.Create(model);
 
                 return RedirectToAction("index");
             }
@@ -107,7 +107,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = unitOfWork.VehicleMakeRepository.GetSingleMake(id, null);
+            var make = vehicleMakeRepository.GetSingleMake(id, null);
 
             if (make == null)
             {
@@ -130,7 +130,7 @@ namespace VehiclesProject.Controllers
             try
             {
                                
-                unitOfWork.VehicleMakeRepository.Edit(id, model);
+                vehicleMakeRepository.Edit(id, model);
 
                 return RedirectToAction("index");
             }
@@ -152,7 +152,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = unitOfWork.VehicleMakeRepository.GetSingleMake(id, null);
+            var make = vehicleMakeRepository.GetSingleMake(id, null);
 
             if (make == null)
             {
@@ -169,7 +169,7 @@ namespace VehiclesProject.Controllers
         {            
             try
             {                
-                unitOfWork.VehicleMakeRepository.Delete(id);
+                vehicleMakeRepository.Delete(id);
 
                 return RedirectToAction("index");
             }

@@ -13,7 +13,8 @@ namespace VehiclesProject.Controllers
 {
     public class VehicleModelController : Controller
     {
-       
+        IVehicleModelRepository vehicleModelRepository = new VehicleModelRepository();
+
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: VehicleModels/Details/id
@@ -26,7 +27,7 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                var vehicleModel = unitOfWork.VehicleModelRepository.GetSingleModel(id, "Make");
+                var vehicleModel = vehicleModelRepository.GetSingleModel(id, "Make");
 
                 if (vehicleModel == null)
                 {
@@ -60,7 +61,7 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                unitOfWork.VehicleModelRepository.Create(model, id);
+                vehicleModelRepository.Create(model, id);
 
                 return RedirectToAction("Details", "VehicleMake", new { id });
             }
@@ -81,7 +82,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = unitOfWork.VehicleModelRepository.GetSingleModel(id, null);
+            var make = vehicleModelRepository.GetSingleModel(id, null);
 
             if (make == null)
             {
@@ -103,9 +104,9 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                unitOfWork.VehicleModelRepository.Edit(id, model);
+                vehicleModelRepository.Edit(id, model);
                 
-                var vehicleModel = unitOfWork.VehicleModelRepository.GetSingleModel(id, null);     
+                var vehicleModel = vehicleModelRepository.GetSingleModel(id, null);     
 
                 return RedirectToAction("Details", "VehicleMake", new { id = vehicleModel.MakeId });
             }
@@ -127,7 +128,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = unitOfWork.VehicleModelRepository.GetSingleModel(id, null);
+            var make = vehicleModelRepository.GetSingleModel(id, null);
 
             if (make == null)
             {
@@ -144,7 +145,7 @@ namespace VehiclesProject.Controllers
         {            
             try
             {
-                unitOfWork.VehicleModelRepository.Delete(id);
+                vehicleModelRepository.Delete(id);
                                 
                 return RedirectToAction("Details", "VehicleMake", new { id = makeId });
             }
@@ -154,11 +155,7 @@ namespace VehiclesProject.Controllers
             }
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            unitOfWork.Dispose();
-            base.Dispose(disposing);
-        }
+       
 
     }
 }

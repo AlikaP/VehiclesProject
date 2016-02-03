@@ -6,6 +6,7 @@ using AutoMapper;
 
 using VehiclesProject.Models;
 using System.Data.Entity;
+using VehiclesProject.Custom;
 
 using PagedList;
 
@@ -22,7 +23,7 @@ namespace VehiclesProject.Data
            
         }
 
-        public virtual IPagedList<T> GetPagedList<T>(IOrderedEnumerable<T> model, int pageSize, int pageNumber) where T : class //, IVehicle
+        public virtual IPagedList<T> GetPagedList<T>(IOrderedQueryable<T> model, int pageSize, int pageNumber) where T : class //, IVehicle
         {           
             
              return model.ToPagedList(pageNumber, pageSize); //filteredModel.OrderBy(m => m.Name).ToPagedList(pageNumber, pageSize);

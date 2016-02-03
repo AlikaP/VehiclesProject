@@ -7,21 +7,29 @@ using VehiclesProject.Data;
 
 namespace VehiclesProject.Custom
 {
-    public class Filtering : IFiltering
+    public abstract class Filtering : IFiltering
     {
-        public IQueryable<VehicleMake> SearchMake(VehicleContext context, string searchString)
-        {
-            var vehicleMakes = from m in context.VehicleMakes select m;
+        protected string searchString;
+        protected string currentFilter;
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                vehicleMakes = vehicleMakes.Where(m => m.Name == searchString
-                                       || m.Abrev == searchString
-                                       || m.VehicleModels.Count(s => s.Name == searchString) > 0);
-            }
+       
 
-            return vehicleMakes;
+        //public IQueryable<VehicleMake> SearchMake(VehicleContext context, string searchString)
+        //{
+            
 
-        }
+
+            //var vehicleMakes = from m in context.VehicleMakes select m;
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    vehicleMakes = vehicleMakes.Where(m => m.Name == searchString
+            //                           || m.Abrev == searchString
+            //                           || m.VehicleModels.Count(s => s.Name == searchString) > 0);
+            //}
+
+            //return vehicleMakes;
+
+        //}
     }
 }

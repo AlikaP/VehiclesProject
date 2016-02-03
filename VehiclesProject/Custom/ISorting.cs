@@ -9,6 +9,6 @@ namespace VehiclesProject.Custom
 {
     public interface ISorting
     {
-        IOrderedEnumerable<T> SortingBy<T>(IQueryable<T> filteredModel, string sortingSwitch, Func<T, string> order) where T : class;
+        //IOrderedEnumerable<T> SortingBy<T>(IQueryable<T> filteredModel, string sortingSwitch, Func<T, string> order) where T : class;
     }
 }

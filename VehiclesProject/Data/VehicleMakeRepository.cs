@@ -10,35 +10,63 @@ using PagedList;
 
 namespace VehiclesProject.Data
 {
-    public class VehicleMakeRepository   : IVehicleMakeRepository 
+    public class VehicleMakeRepository :  IVehicleMakeRepository, IFiltering
     {
        
-        private VehicleContext context;
         private IGenericRepository genericRepository;
 
-        public VehicleMakeRepository(VehicleContext context)
+        private VehicleContext context = new VehicleContext();
+
+        public VehicleMakeRepository()
         {
-            this.context = context;
-            this.genericRepository = new GenericRepository(context);
+            this.genericRepository = new GenericRepository(context);    
         }
 
         
-        public IPagedList<VehicleMake> GetMakes(string currentFilter, string searchString, int? page) 
+        public IPagedList<VehicleMake> GetMakes(string currentFilter, string searchString, int? page)
         {
             int pageSize = 5;
             
-            IPaging paging = new Paging();
-            var pagination = paging.SetPagination(currentFilter, searchString, page);
-            searchString = pagination.Item1;
-            int pageNumber = pagination.Item2;
+            //
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
             
-            IFiltering filter = new Filtering();
-            var filteredModel = filter.SearchMake(context, searchString);
+            int pageNumber = (page ?? 1);
 
-            ISorting sort = new Sorting();
-            var model = sort.SortingBy(filteredModel, "asc", m => m.Name);
 
-            return genericRepository.GetPagedList(model, pageSize, pageNumber);
+            //
+            var vehicleMakes = from m in context.VehicleMakes select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vehicleMakes = vehicleMakes.Where(m => m.Name == searchString
+                                       || m.Abrev == searchString
+                                       || m.VehicleModels.Count(s => s.Name == searchString) > 0);
+            }
+
+
+            //
+            var sortedModel = vehicleMakes.OrderBy(m => m.Name);
+            
+
+            //IPaging paging = new Paging();
+            //var pagination = paging.SetPagination(currentFilter, searchString, page);
+            //searchString = pagination.Item1;
+            //int pageNumber = pagination.Item2;
+
+            //IFiltering filter = new Filtering();
+            //var filteredModel = filter.SearchMake(context, searchString);
+
+            //ISorting sort = new Sorting();
+            //var model = sort.SortingBy(filteredModel, "asc", m => m.Name);
+
+            return genericRepository.GetPagedList(sortedModel, pageSize, pageNumber);
         }
 
         public VehicleMake GetSingleMake(int? id, string includedModel)
