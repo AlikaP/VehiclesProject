@@ -10,7 +10,7 @@ using PagedList;
 
 namespace VehiclesProject.Data
 {
-    public class VehicleMakeRepository :  IVehicleMakeRepository, IFiltering
+    public class VehicleMakeRepository :  IVehicleMakeRepository
     {
        
         private IGenericRepository genericRepository;
@@ -22,24 +22,21 @@ namespace VehiclesProject.Data
             this.genericRepository = new GenericRepository(context);    
         }
 
-        
+        public string SearchString { get; set; }
+        public string CurrentFilter { get; set; }
+
         public IPagedList<VehicleMake> GetMakes(string currentFilter, string searchString, int? page)
         {
+            
+            IFiltering filter = new Filtering();
+            searchString = filter.GetFilter(currentFilter, searchString);
+            
             int pageSize = 5;
-            
-            //
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-            
-            int pageNumber = (page ?? 1);
 
+            IPaging paging = new Paging();
+            int pageNumber = paging.GetPage(page);
 
+           
             //
             var vehicleMakes = from m in context.VehicleMakes select m;
 
@@ -70,7 +67,7 @@ namespace VehiclesProject.Data
         }
 
         public VehicleMake GetSingleMake(int? id, string includedModel)
-        {
+        {            
             if (includedModel != null)
             {
                 var model = context.VehicleMakes.Include(includedModel);

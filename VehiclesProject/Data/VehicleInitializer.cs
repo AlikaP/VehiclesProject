@@ -14,6 +14,7 @@ namespace VehiclesProject.Data
 
             var vehicleMakes = new List<VehicleMake>
             {
+                
                 new VehicleMake{Name="Audi",Abrev="AUDI"},
                 new VehicleMake{Name="BMW",Abrev="BMW"},
                 new VehicleMake{Name="Chevrolet",Abrev="CHEW"},

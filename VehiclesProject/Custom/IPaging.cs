@@ -10,6 +10,8 @@ namespace VehiclesProject.Custom
     public interface IPaging
     {
         //Tuple<string, int> SetPagination(string currentFilter, string searchString, int? page);
-        
+
+        int GetPage(int? page);
+
     }
 }

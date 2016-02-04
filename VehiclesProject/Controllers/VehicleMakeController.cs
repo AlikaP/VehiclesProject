@@ -28,9 +28,12 @@ namespace VehiclesProject.Controllers
                
                 ViewBag.NumItems = vehicleMakeRepository.GetItemNum();
                 
-                ViewBag.CurrentFilter = searchString;
+                if(searchString != null)
+                    ViewBag.CurrentFilter = searchString;
+                else
+                    ViewBag.CurrentFilter = currentFilter;
 
-               
+
                 var model = vehicleMakeRepository.GetMakes(currentFilter, searchString, page);
                
                 
