@@ -21,10 +21,7 @@ namespace VehiclesProject.Data
         {
             this.genericRepository = new GenericRepository(context);    
         }
-
-        public string SearchString { get; set; }
-        public string CurrentFilter { get; set; }
-
+        
         public IPagedList<VehicleMake> GetMakes(string currentFilter, string searchString, int? page)
         {
             
