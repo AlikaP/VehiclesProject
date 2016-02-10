@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Linq.Dynamic;
 
 using VehiclesProject.Models;
 using VehiclesProject.Custom;
@@ -22,18 +23,18 @@ namespace VehiclesProject.Data
             this.genericRepository = new GenericRepository(context);    
         }
         
-        public IPagedList<VehicleMake> GetMakes(string currentFilter, string searchString, int? page)
+        public IPagedList<VehicleMake> GetMakes(IFiltering filter, IPaging paging, ISorting sorting)
         {
             
-            IFiltering filter = new Filtering();
-            searchString = filter.GetFilter(currentFilter, searchString);
-            
-            int pageSize = 5;
+            //IFiltering filter = new Filtering(currentFilter, searchString);
+            var searchString = filter.SearchString;
+            //int pageSize = 5;
 
-            IPaging paging = new Paging();
-            int pageNumber = paging.GetPage(page);
+            //IPaging paging = new Paging(page, pageSize);
+            int pageNumber = paging.PageNumber;
+            int pageSize = paging.PageSize;
 
-           
+
             //
             var vehicleMakes = from m in context.VehicleMakes select m;
 
@@ -44,10 +45,11 @@ namespace VehiclesProject.Data
                                        || m.VehicleModels.Count(s => s.Name == searchString) > 0);
             }
 
-
-            //
-            var sortedModel = vehicleMakes.OrderBy(m => m.Name);
             
+            //
+            var sortedModel = vehicleMakes.OrderBy(sorting.Sorters.FirstOrDefault().GetSortExpression());
+                        
+
 
             //IPaging paging = new Paging();
             //var pagination = paging.SetPagination(currentFilter, searchString, page);

@@ -9,17 +9,28 @@ namespace VehiclesProject.Custom
 {
     public class Filtering : IFiltering
     {
-        
-        public string GetFilter(string searchString, string currentFilter)
+        public string SearchString{get; set;}
+
+        public Filtering(string currentFilter, string searchString)
         {
-           
-            if(searchString == null)
+            if (searchString == null)
             {
-                searchString = currentFilter;
+                this.SearchString = currentFilter;
             }
-            
-            return searchString;
+            else
+                this.SearchString = searchString;
         }
+
+        //public string GetFilter(string searchString, string currentFilter)
+        //{
+
+        //    if(searchString == null)
+        //    {
+        //        searchString = currentFilter;
+        //    }
+
+        //    return searchString;
+        //}
 
     }
 }

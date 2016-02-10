@@ -11,7 +11,19 @@ namespace VehiclesProject.Custom
     {
         //Tuple<string, int> SetPagination(string currentFilter, string searchString, int? page);
 
-        int GetPage(int? page);
+        #region Properties
+
+        /// <summary>
+        /// Gets the Page number.
+        /// </summary>
+        int PageNumber { get; }
+
+        /// <summary>
+        /// Gets the Page size.
+        /// </summary>
+        int PageSize { get; }
+
+        #endregion Properties
 
     }
 }

@@ -11,6 +11,7 @@ using VehiclesProject.Models;
 using System.Net.Http;
 
 using PagedList;
+using VehiclesProject.Custom;
 
 namespace VehiclesProject.Controllers
 {
@@ -21,22 +22,36 @@ namespace VehiclesProject.Controllers
         IVehicleMakeRepository vehicleMakeRepository = new VehicleMakeRepository();
 
         // GET: VehicleMakes
-        public  ActionResult Index(string currentFilter, string searchString, int? page)
-        {           
+        public  ActionResult Index(string currentFilter, string searchString, int? pageNumber, int? pageSize, bool? sortOrder, string orderBy="Name")
+        {
             try
             {
-               
+                
+                //sort
+                ViewBag.CurrentSortOrder = sortOrder;
+                ViewBag.CurrentSortParam = orderBy;
+
+                if (sortOrder == true)
+                    ViewBag.SortOrder = false;
+                else if (sortOrder == false)
+                    ViewBag.SortOrder = true;
+                else if (sortOrder == null)
+                    { ViewBag.SortOrder = false; sortOrder = true; }
+
                 ViewBag.NumItems = vehicleMakeRepository.GetItemNum();
-                
-                if(searchString != null)
-                    ViewBag.CurrentFilter = searchString;
-                else
-                    ViewBag.CurrentFilter = currentFilter;
+            
 
+                //search
+                if (searchString != null)
+                        ViewBag.CurrentFilter = searchString;
+                    else
+                        ViewBag.CurrentFilter = currentFilter;
 
-                var model = vehicleMakeRepository.GetMakes(currentFilter, searchString, page);
-               
-                
+                    var model = vehicleMakeRepository.GetMakes(new Filtering(currentFilter, searchString),
+                                                                new Paging(pageNumber, pageSize),
+                                                                new Sorting(new SortingPair(sortOrder, orderBy)));
+
+             
                 return View(model);
             }
             catch (Exception)

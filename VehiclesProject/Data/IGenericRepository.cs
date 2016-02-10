@@ -16,7 +16,7 @@ namespace VehiclesProject.Data
         void Edit<T>(T item, T updatedItem) where T : class;
         void Create<T>(T model) where T : class;
         void Delete<T>(T item) where T : class;
-        IPagedList<T> GetPagedList<T>(IOrderedQueryable<T> model, int pageSize, int pageNumber) where T : class; //, IVehicle;
+        IPagedList<T> GetPagedList<T>(IQueryable<T> model, int pageSize, int pageNumber) where T : class; //, IVehicle;
         
     }
 }

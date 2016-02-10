@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 using VehiclesProject.Models;
 using PagedList;
+using VehiclesProject.Custom;
 
 namespace VehiclesProject.Data
 {
     public interface IVehicleMakeRepository
     {
-         IPagedList<VehicleMake> GetMakes(string currentFilter, string searchString, int? page);
+         IPagedList<VehicleMake> GetMakes(IFiltering filter, IPaging paging, ISorting sorting);
          VehicleMake GetSingleMake(int? id, string includedModel);
          void Create(VehicleMake model);
          void Edit(int? id, VehicleMake updatedItem);
