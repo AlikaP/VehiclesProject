@@ -72,7 +72,11 @@ namespace VehiclesProject.Data
             if (includedModel != null)
             {
                 var searchString = filter.SearchString;
-                                                
+
+                //context.Configuration.LazyLoadingEnabled = false;
+
+                //var model = context.VehicleMakes.Include(includedModel);
+                
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     context.Configuration.LazyLoadingEnabled = false;
@@ -82,7 +86,7 @@ namespace VehiclesProject.Data
 
                     if (vehicleMake != null)
                     {
-                        
+                        //context.Configuration.LazyLoadingEnabled = false;
                         context.Entry(vehicleMake)
                         .Collection(includedModel)
                         .Query()
@@ -93,10 +97,12 @@ namespace VehiclesProject.Data
                     else if (vehicleMake == null)
                     {
                         
+                        //context.Configuration.LazyLoadingEnabled = false;
+                        
                         return context.VehicleMakes.SingleOrDefault(item => item.Id == id);
                     }
                 }
-                
+                //else return model.SingleOrDefault(item => item.Id == id);
 
                 return context.VehicleMakes.Include(includedModel).SingleOrDefault(item => item.Id == id);
                                
@@ -138,16 +144,19 @@ namespace VehiclesProject.Data
 
         public int GetModelNum(int? id)
         {
+
             //context.Configuration.LazyLoadingEnabled = false;
             
-            var vehicleMakes = context.VehicleMakes.Select(m => m).Where(f => f.Id == id).SingleOrDefault();
-            var modelCount = context.Entry(vehicleMakes).Collection("VehicleModels").Query().Count();
+            //var model = context.VehicleMakes.SingleOrDefault(p => p.Id == id);
+            var a = context.VehicleMakes.Select(m => m).Where(f => f.Id == id).SingleOrDefault();
+            //context.Configuration.LazyLoadingEnabled = false;
+            //var b = context.Entry(a).Collection("VehicleModels").Query().Count();
 
             //return context.VehicleModels.Where(p => p.MakeId == id).Count();
 
-            //return vehicleMakes.VehicleModels.Count(); //filtered number
+            return a.VehicleModels.Count();
 
-            return modelCount;
+            //return b;
         }
 
 

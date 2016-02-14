@@ -13,11 +13,12 @@ namespace VehiclesProject.Data
     public interface IVehicleMakeRepository
     {
          IPagedList<VehicleMake> GetMakes(IFiltering filter, IPaging paging, ISorting sorting);
-         VehicleMake GetSingleMake(int? id, string includedModel);
+        VehicleMake GetSingleMake(int? id, string includedModel, IFiltering filter);
          void Create(VehicleMake model);
          void Edit(int? id, VehicleMake updatedItem);
          void Delete(int? id);
         int GetItemNum();
+        int GetModelNum(int? id);
 
     }
 }

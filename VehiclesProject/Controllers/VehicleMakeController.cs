@@ -61,7 +61,7 @@ namespace VehiclesProject.Controllers
         }
 
         // GET: VehicleMakes/Details/id
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string searchString)
         {                        
             if (id == null)
             {
@@ -70,8 +70,10 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                var vehicleMake = vehicleMakeRepository.GetSingleMake(id, "VehicleModels");
-                ViewBag.NumItems = vehicleMake.VehicleModels.Count();
+
+                var vehicleMake = vehicleMakeRepository.GetSingleMake(id, "VehicleModels", new Filtering(null, searchString));
+                ViewBag.NumItems = vehicleMakeRepository.GetModelNum(id);
+                //ViewBag.NumItems = vehicleMake.VehicleModels.Count();
 
                 if (vehicleMake == null)
                 {
@@ -125,7 +127,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleMakeRepository.GetSingleMake(id, null);
+            var make = vehicleMakeRepository.GetSingleMake(id, null, null);
 
             if (make == null)
             {
@@ -170,7 +172,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleMakeRepository.GetSingleMake(id, null);
+            var make = vehicleMakeRepository.GetSingleMake(id, null, null);
 
             if (make == null)
             {

@@ -6,6 +6,14 @@
 <br />
 <h2>Details</h2>
 
+@using (Html.BeginForm("Details", "VehicleMake", FormMethod.Get))
+{
+    <p>
+        Find model/make: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <div>
     <h4>Vehicle Make</h4>
     <hr />
@@ -49,14 +57,18 @@
                                        
                     <tr>
                         <th>Model Name</th>
-                        <th>Model Abrevation</th>
+                        <th>Model Abbrevation</th>
                         <td>
                             <p>
                                 @Html.ActionLink("Create New Model", "Create", "VehicleModel", new { id = @Model.Id }, null)
                             </p>
                         </td>
                     </tr>
-                    @foreach (var item in Model.VehicleModels)
+
+@if (Model.VehicleModels != null)
+{
+
+                    foreach (var item in Model.VehicleModels)
                     {
                         <tr>
                             <td>
@@ -72,6 +84,8 @@
                             </td>
                         </tr>
                     }
+
+}
                 </table>
             </dd>
         }
