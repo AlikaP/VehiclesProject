@@ -148,29 +148,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VehicleMakeController.cs" />
     <Compile Include="Controllers\VehicleModelController.cs" />
-    <Compile Include="Custom\Filtering.cs" />
-    <Compile Include="Custom\ISortingPair.cs" />
-    <Compile Include="Custom\SortingPair.cs" />
-    <Compile Include="Data\GenericRepository.cs" />
-    <Compile Include="Custom\IFiltering.cs" />
-    <Compile Include="Data\IGenericRepository.cs" />
-    <Compile Include="Custom\IPaging.cs" />
-    <Compile Include="Custom\ISorting.cs" />
-    <Compile Include="Data\IVehicleMakeRepository.cs" />
-    <Compile Include="Data\IVehicleModelRepository.cs" />
-    <Compile Include="Custom\Paging.cs" />
-    <Compile Include="Custom\Sorting.cs" />
-    <Compile Include="Data\UnitOfWork.cs" />
-    <Compile Include="Data\VehicleMakeRepository.cs" />
-    <Compile Include="Data\VehicleContext.cs" />
-    <Compile Include="Data\VehicleInitializer.cs" />
-    <Compile Include="Data\VehicleModelRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\IVehicle.cs" />
-    <Compile Include="Models\VehicleMake.cs" />
-    <Compile Include="Models\VehicleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +208,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Custom\" />
+    <Folder Include="Models\" />
     <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +219,32 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VehiclesProject.Common\VehiclesProject.Common.csproj">
+      <Project>{60e005ae-0b59-45cd-a36c-665d462072cc}</Project>
+      <Name>VehiclesProject.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehiclesProject.DAL\VehiclesProject.DAL.csproj">
+      <Project>{5502876f-6cee-4d3b-935f-3663b32315e7}</Project>
+      <Name>VehiclesProject.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehiclesProject.Model.Common\VehiclesProject.Model.Common.csproj">
+      <Project>{7288441c-2f67-44e2-9ca8-28134191c039}</Project>
+      <Name>VehiclesProject.Model.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehiclesProject.Model\VehiclesProject.Model.csproj">
+      <Project>{4f92ff38-ae8d-4317-aa41-3f43dcfb6739}</Project>
+      <Name>VehiclesProject.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehiclesProject.Repository.Common\VehiclesProject.Repository.Common.csproj">
+      <Project>{c5fd5108-8568-4d48-8f9c-e84c7fe66fe4}</Project>
+      <Name>VehiclesProject.Repository.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehiclesProject.Repository\VehiclesProject.Repository.csproj">
+      <Project>{160c7bc1-6ea0-4683-9b51-66c5ff5417cd}</Project>
+      <Name>VehiclesProject.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

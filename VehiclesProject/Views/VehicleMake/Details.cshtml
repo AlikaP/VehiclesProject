@@ -1,4 +1,4 @@
-﻿@model VehiclesProject.Models.VehicleMake
+﻿@model VehiclesProject.Model.VehicleMakePoco
 
 @{
     ViewBag.Title = "Details";
@@ -9,7 +9,7 @@
 @using (Html.BeginForm("Details", "VehicleMake", FormMethod.Get))
 {
     <p>
-        Find model/make: @Html.TextBox("searchString")
+        Find model: @Html.TextBox("searchString")
         <input type="submit" value="Search" />
     </p>
 }

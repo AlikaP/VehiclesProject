@@ -6,12 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using VehiclesProject.Data;
-using VehiclesProject.Models;
+using VehiclesProject.Model;
 using System.Net.Http;
 
 using PagedList;
-using VehiclesProject.Custom;
+using VehiclesProject.Repository;
+using VehiclesProject.Common;
+using VehiclesProject.Repository.Common;
+using VehiclesProject.Model.Common;
 
 namespace VehiclesProject.Controllers
 {
@@ -24,9 +26,9 @@ namespace VehiclesProject.Controllers
         // GET: VehicleMakes
         public  ActionResult Index(string currentFilter, string searchString, int? pageNumber, int? pageSize, bool? sortOrder, string orderBy="Name")
         {
-            try
-            {
-                
+
+            
+
                 //sort
                 ViewBag.CurrentSortOrder = sortOrder;
                 ViewBag.CurrentSortParam = orderBy;
@@ -53,11 +55,9 @@ namespace VehiclesProject.Controllers
 
              
                 return View(model);
-            }
-            catch (Exception)
-            {
-                return new HttpStatusCodeResult(500);
-            }
+
+            
+
         }
 
         // GET: VehicleMakes/Details/id
@@ -92,13 +92,13 @@ namespace VehiclesProject.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(new VehicleMake());
+            return View(new VehicleMakePoco());
         }
 
         // POST: VehicleMakes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(VehicleMake model)
+        public ActionResult Create(VehicleMakePoco model)
         {            
             if (!ModelState.IsValid)
             {
@@ -140,7 +140,7 @@ namespace VehiclesProject.Controllers
         // POST: VehicleMakes/Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, VehicleMake model)
+        public ActionResult Edit(int? id, VehicleMakePoco model)
         {            
             if (!ModelState.IsValid)
             {

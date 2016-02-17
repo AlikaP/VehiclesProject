@@ -6,8 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using VehiclesProject.Data;
-using VehiclesProject.Models;
+using VehiclesProject.Model;
+using VehiclesProject.Repository;
+using VehiclesProject.Repository.Common;
 
 namespace VehiclesProject.Controllers
 {
@@ -15,7 +16,7 @@ namespace VehiclesProject.Controllers
     {
         IVehicleModelRepository vehicleModelRepository = new VehicleModelRepository();
 
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        //private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: VehicleModels/Details/id
         public ActionResult Details(int? id)
@@ -46,13 +47,13 @@ namespace VehiclesProject.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(new VehicleModel());
+            return View(new VehicleModelPoco());
         }
 
         // POST: VehicleModels/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(VehicleModel model, int? id)
+        public ActionResult Create(VehicleModelPoco model, int? id)
         {       
             if (!ModelState.IsValid)
             {
@@ -95,26 +96,20 @@ namespace VehiclesProject.Controllers
         // POST: VehicleModels/Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, VehicleModel model)
+        public ActionResult Edit(int id, VehicleModelPoco model)
         {           
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            try
-            {
+            
                 vehicleModelRepository.Edit(id, model);
                 
                 var vehicleModel = vehicleModelRepository.GetSingleModel(id, null);     
 
                 return RedirectToAction("Details", "VehicleMake", new { id = vehicleModel.MakeId });
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Unable to save changes, please try again");
-                return View(model);
-            }
+            
 
 
         }
