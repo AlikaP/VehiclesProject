@@ -1,0 +1,5 @@
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\bin\Debug\VehiclesProject.Model.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\bin\Debug\VehiclesProject.Model.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\obj\Debug\VehiclesProject.Model.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\obj\Debug\VehiclesProject.Model.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\obj\Debug\VehiclesProject.Model.Common.csprojResolveAssemblyReference.cache

@@ -1,0 +1,12 @@
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\VehiclesProject.DAL.dll.config
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\VehiclesProject.DAL.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\VehiclesProject.DAL.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\VehiclesProject.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\VehiclesProject.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\obj\Debug\VehiclesProject.DAL.csprojResolveAssemblyReference.cache
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\obj\Debug\VehiclesProject.DAL.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\obj\Debug\VehiclesProject.DAL.pdb

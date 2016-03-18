@@ -49,3 +49,15 @@ C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProj
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\PagedList.Mvc.xml
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\obj\Debug\VehiclesProject.csprojResolveAssemblyReference.cache
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\System.Linq.Dynamic.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.DAL.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Model.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Model.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Repository.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Repository.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.DAL.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Model.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Model.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Repository.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Repository.pdb

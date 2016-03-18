@@ -1,0 +1,13 @@
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\VehiclesProject.Model.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\VehiclesProject.Model.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\VehiclesProject.Model.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\VehiclesProject.Model.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\obj\Debug\VehiclesProject.Model.csprojResolveAssemblyReference.cache
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\obj\Debug\VehiclesProject.Model.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\obj\Debug\VehiclesProject.Model.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\AutoMapper.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\VehiclesProject.DAL.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\EntityFramework.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\VehiclesProject.DAL.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\AutoMapper.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\EntityFramework.xml
