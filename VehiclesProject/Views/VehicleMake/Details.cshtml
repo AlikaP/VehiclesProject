@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
+
 <br />
 <h2>Details</h2>
 
@@ -18,8 +19,7 @@
     <h4>Vehicle Make</h4>
     <hr />
                
-    <dl class="dl-horizontal">
-        
+    <dl class="dl-horizontal">      
           
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -46,10 +46,8 @@
         </dt>
 
         @if (ViewBag.NumItems != 0)
-        {
-             
-            <dd>
-                          
+        {            
+            <dd>                       
                 <table class="table">
                     <tr>
                         <th>Number of vehicle models: @ViewBag.NumItems   </th>
@@ -65,27 +63,25 @@
                         </td>
                     </tr>
 
-@if (Model.VehicleModels != null)
-{
-
-                    foreach (var item in Model.VehicleModels)
+                    @if (Model.VehicleModels != null)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Abrev)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", "VehicleModel", new { id = item.Id }, null) |
-                                @Html.ActionLink("Details", "Details", "VehicleModel", new { id = item.Id }, null) |
-                                @Html.ActionLink("Delete", "Delete", "VehicleModel", new { id = item.Id, makeId = item.MakeId }, null)
-                            </td>
-                        </tr>
+                        foreach (var item in Model.VehicleModels)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Abrev)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "VehicleModel", new { id = item.Id }, null) |
+                                    @Html.ActionLink("Details", "Details", "VehicleModel", new { id = item.Id }, null) |
+                                    @Html.ActionLink("Delete", "Delete", "VehicleModel", new { id = item.Id, makeId = item.MakeId }, null)
+                                </td>
+                            </tr>
+                        }
                     }
-
-}
                 </table>
             </dd>
         }
@@ -100,12 +96,8 @@
                 </p>
             </dd>
         }
-        
-
-
+   
     </dl>
-
-
 
 </div>
 <p>

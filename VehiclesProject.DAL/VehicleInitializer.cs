@@ -11,10 +11,8 @@ namespace VehiclesProject.DAL
     {
         protected override void Seed(VehicleContext context)
         {         
-
             var vehicleMakes = new List<VehicleMake>
-            {
-                
+            {               
                 new VehicleMake{Name="Audi",Abrev="AUDI"},
                 new VehicleMake{Name="BMW",Abrev="BMW"},
                 new VehicleMake{Name="Chevrolet",Abrev="CHEW"},
@@ -25,12 +23,10 @@ namespace VehiclesProject.DAL
                 new VehicleMake{Name="Corvette",Abrev="CHEV"},
                 new VehicleMake{Name="Nissan",Abrev="NISS"},
                 new VehicleMake{Name="Kaiser",Abrev="KAIS"}
-
             };
 
             vehicleMakes.ForEach(s => context.VehicleMakes.Add(s));
             context.SaveChanges();
-
 
             var vehicleModels = new List<VehicleModel>
             {
@@ -46,11 +42,9 @@ namespace VehiclesProject.DAL
                 new VehicleModel{MakeId=5,Name="007",Abrev="Century"}
 
             };
+
             vehicleModels.ForEach(s => context.VehicleModels.Add(s));
             context.SaveChanges();
-
-            
-
         }
     }
 }

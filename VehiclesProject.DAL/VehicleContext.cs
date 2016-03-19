@@ -22,23 +22,14 @@ namespace VehiclesProject.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
-
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new VehicleMakeMap());
-            modelBuilder.Configurations.Add(new VehicleModelMap());
-           
-            
+            modelBuilder.Configurations.Add(new VehicleModelMap());   
         }
-
-
     }
 
     public interface IApplicationDbContext : IDisposable
-    {
-        
-
+    {      
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
-        
     }
 }

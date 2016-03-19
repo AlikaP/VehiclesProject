@@ -7,7 +7,6 @@ namespace VehiclesProject.Common
 {
     public class Paging : IPaging
     {
-
         public int PageNumber { get; }
         
         public int PageSize { get; }
@@ -22,7 +21,6 @@ namespace VehiclesProject.Common
         //{
         //    return (page ?? 1);
         //}
-
         
     }
 }

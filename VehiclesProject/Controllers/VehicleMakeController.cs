@@ -8,12 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using VehiclesProject.Model;
 using System.Net.Http;
-
 using PagedList;
 using VehiclesProject.Repository;
 using VehiclesProject.Common;
 using VehiclesProject.Repository.Common;
 using VehiclesProject.Model.Common;
+using VehiclesProject.Service;
+using VehiclesProject.Service.Common;
 
 namespace VehiclesProject.Controllers
 {
@@ -21,43 +22,35 @@ namespace VehiclesProject.Controllers
     {
         //UnitOfWork unitOfWork = new UnitOfWork();
 
-        IVehicleMakeRepository vehicleMakeRepository = new VehicleMakeRepository();
+        IVehicleMakeService vehicleMakeService = new VehicleMakeService();
 
         // GET: VehicleMakes
         public  ActionResult Index(string currentFilter, string searchString, int? pageNumber, int? pageSize, bool? sortOrder, string orderBy="Name")
         {
+            //sort
+            ViewBag.CurrentSortOrder = sortOrder;
+            ViewBag.CurrentSortParam = orderBy;
 
-            
+            if (sortOrder == true)
+                ViewBag.SortOrder = false;
+            else if (sortOrder == false)
+                ViewBag.SortOrder = true;
+            else if (sortOrder == null)
+                { ViewBag.SortOrder = false; sortOrder = true; }
 
-                //sort
-                ViewBag.CurrentSortOrder = sortOrder;
-                ViewBag.CurrentSortParam = orderBy;
+            ViewBag.NumItems = vehicleMakeService.GetItemNum();
+         
+            //search
+            if (searchString != null)
+                    ViewBag.CurrentFilter = searchString;
+            else
+                ViewBag.CurrentFilter = currentFilter;
 
-                if (sortOrder == true)
-                    ViewBag.SortOrder = false;
-                else if (sortOrder == false)
-                    ViewBag.SortOrder = true;
-                else if (sortOrder == null)
-                    { ViewBag.SortOrder = false; sortOrder = true; }
-
-                ViewBag.NumItems = vehicleMakeRepository.GetItemNum();
-            
-
-                //search
-                if (searchString != null)
-                        ViewBag.CurrentFilter = searchString;
-                    else
-                        ViewBag.CurrentFilter = currentFilter;
-
-                    var model = vehicleMakeRepository.GetMakes(new Filtering(currentFilter, searchString),
-                                                                new Paging(pageNumber, pageSize),
-                                                                new Sorting(new SortingPair(sortOrder, orderBy)));
-
+            var model = vehicleMakeService.GetMakes(new Filtering(currentFilter, searchString),
+                                                        new Paging(pageNumber, pageSize),
+                                                        new Sorting(new SortingPair(sortOrder, orderBy)));
              
-                return View(model);
-
-            
-
+            return View(model);
         }
 
         // GET: VehicleMakes/Details/id
@@ -68,24 +61,16 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            try
+            var vehicleMake = vehicleMakeService.GetSingleMake(id, "VehicleModels", new Filtering(null, searchString));
+            ViewBag.NumItems = vehicleMakeService.GetModelNum(id);
+            //ViewBag.NumItems = vehicleMake.VehicleModels.Count();
+
+            if (vehicleMake == null)
             {
-
-                var vehicleMake = vehicleMakeRepository.GetSingleMake(id, "VehicleModels", new Filtering(null, searchString));
-                ViewBag.NumItems = vehicleMakeRepository.GetModelNum(id);
-                //ViewBag.NumItems = vehicleMake.VehicleModels.Count();
-
-                if (vehicleMake == null)
-                {
-                    return HttpNotFound();
-                }
-
-                return View(vehicleMake);
+                return HttpNotFound();
             }
-            catch (Exception)
-            {
-                return new HttpStatusCodeResult(500);
-            }
+
+            return View(vehicleMake);           
         }
 
         // GET: VehicleMakes/Create
@@ -105,17 +90,9 @@ namespace VehiclesProject.Controllers
                 return View(model);
             }
 
-            try
-            {                
-                vehicleMakeRepository.Create(model);
+            vehicleMakeService.Create(model);
 
-                return RedirectToAction("index");
-            }
-            catch (DataException)
-            {                
-                ModelState.AddModelError("", "Unable to save changes, please try again");
-                return View(model);
-            }
+            return RedirectToAction("index");
         }
 
         // GET: VehicleMakes/Edit/id
@@ -127,7 +104,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleMakeRepository.GetSingleMake(id, null, null);
+            var make = vehicleMakeService.GetSingleMake(id, null, null);
 
             if (make == null)
             {
@@ -147,20 +124,15 @@ namespace VehiclesProject.Controllers
                 return View(model);
             }       
 
-            try
-            {
-                               
-                vehicleMakeRepository.Edit(id, model);
+            vehicleMakeService.Edit(id, model);
 
-                return RedirectToAction("index");
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Unable to save changes, please try again");
-                return View(model);
-            }
+            return RedirectToAction("index");
 
-
+            //catch (DataException)
+            //{
+            //    ModelState.AddModelError("", "Unable to save changes, please try again");
+            //    return View(model);
+            //}
         }
 
         // GET: VehicleMakes/Delete/id
@@ -172,7 +144,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleMakeRepository.GetSingleMake(id, null, null);
+            var make = vehicleMakeService.GetSingleMake(id, null, null);
 
             if (make == null)
             {
@@ -187,17 +159,9 @@ namespace VehiclesProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {            
-            try
-            {                
-                vehicleMakeRepository.Delete(id);
+            vehicleMakeService.Delete(id);
 
-                return RedirectToAction("index");
-            }
-            catch (DataException)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-        }
-        
+            return RedirectToAction("index");
+        }       
     }
 }

@@ -12,8 +12,7 @@ namespace VehiclesProject.Model.Mapping
     public class AutoMapperMaps
     {
         public static void Initialize()
-        {
-            
+        {           
             AutoMapper.Mapper.CreateMap<VehicleMake, VehicleMakePoco>().ReverseMap();
             AutoMapper.Mapper.CreateMap<VehicleMake, IVehicleMake>().ReverseMap();
             AutoMapper.Mapper.CreateMap<IVehicleMake, VehicleMakePoco>().ReverseMap();

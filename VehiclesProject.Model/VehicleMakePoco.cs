@@ -8,8 +8,7 @@ using VehiclesProject.Model.Common;
 namespace VehiclesProject.Model
 {
     public class VehicleMakePoco : IVehicleMake
-    {
-        
+    {       
         public int Id { get; set; }
 
         [Display(Name = "Make Name")]
@@ -22,6 +21,5 @@ namespace VehiclesProject.Model
 
         [Display(Name = "Models")]
         public virtual ICollection<IVehicleModel> VehicleModels { get; set; }
-
     }
 }

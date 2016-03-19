@@ -61,3 +61,7 @@ C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProj
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Model.pdb
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Repository.Common.pdb
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Repository.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Service.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Service.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Service.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject\bin\VehiclesProject.Service.pdb

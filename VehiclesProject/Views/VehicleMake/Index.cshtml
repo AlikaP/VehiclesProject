@@ -1,5 +1,4 @@
-﻿
-@model PagedList.IPagedList<VehiclesProject.Model.VehicleMakePoco>
+﻿@model PagedList.IPagedList<VehiclesProject.Model.VehicleMakePoco>
 
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -32,16 +31,15 @@
     <tr>
         <th>
             @Html.ActionLink("Make Name", "Index", new
-       {
-           orderBy = "Name",
-           sortOrder = ViewBag.SortOrder,
-           currentFilter = ViewBag.CurrentFilter
-       })
+            {
+                orderBy = "Name",
+                sortOrder = ViewBag.SortOrder,
+                currentFilter = ViewBag.CurrentFilter
+            })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Abrev)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {

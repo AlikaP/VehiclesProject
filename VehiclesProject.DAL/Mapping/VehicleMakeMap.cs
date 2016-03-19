@@ -20,8 +20,6 @@ namespace VehiclesProject.DAL.Mapping
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Abrev).HasColumnName("Abrev");
-
-
         }
     }
 }

@@ -9,12 +9,14 @@ using System.Web.Mvc;
 using VehiclesProject.Model;
 using VehiclesProject.Repository;
 using VehiclesProject.Repository.Common;
+using VehiclesProject.Service;
+using VehiclesProject.Service.Common;
 
 namespace VehiclesProject.Controllers
 {
     public class VehicleModelController : Controller
     {
-        IVehicleModelRepository vehicleModelRepository = new VehicleModelRepository();
+        IVehicleModelService vehicleModelService = new VehicleModelService();
 
         //private UnitOfWork unitOfWork = new UnitOfWork();
 
@@ -26,21 +28,14 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            try
-            {
-                var vehicleModel = vehicleModelRepository.GetSingleModel(id, "Make");
+            var vehicleModel = vehicleModelService.GetSingleModel(id, "Make");
 
-                if (vehicleModel == null)
-                {
-                    return HttpNotFound();
-                }
-
-                return View(vehicleModel);
-            }
-            catch (Exception)
+            if (vehicleModel == null)
             {
-                return new HttpStatusCodeResult(500);
+                return HttpNotFound();
             }
+
+            return View(vehicleModel);
         }
 
         // GET: VehicleModels/Create
@@ -60,30 +55,21 @@ namespace VehiclesProject.Controllers
                 return View(model);
             }
 
-            try
-            {
-                vehicleModelRepository.Create(model, id);
+            vehicleModelService.Create(model, id);
 
-                return RedirectToAction("Details", "VehicleMake", new { id });
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Unable to save changes, please try again");
-                return View(model);
-            }
+            return RedirectToAction("Details", "VehicleMake", new { id });
         }
 
         // GET: VehicleModels/Edit/id
         [HttpGet]
         public ActionResult Edit(int? id)
-        {   
-                     
+        {                        
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleModelRepository.GetSingleModel(id, null);
+            var make = vehicleModelService.GetSingleModel(id, null);
 
             if (make == null)
             {
@@ -103,15 +89,11 @@ namespace VehiclesProject.Controllers
                 return View(model);
             }
 
-            
-                vehicleModelRepository.Edit(id, model);
+            vehicleModelService.Edit(id, model);
                 
-                var vehicleModel = vehicleModelRepository.GetSingleModel(id, null);     
+            var vehicleModel = vehicleModelService.GetSingleModel(id, null);     
 
-                return RedirectToAction("Details", "VehicleMake", new { id = vehicleModel.MakeId });
-            
-
-
+            return RedirectToAction("Details", "VehicleMake", new { id = vehicleModel.MakeId });
         }
 
         // GET: VehicleModels/Delete/id
@@ -123,7 +105,7 @@ namespace VehiclesProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleModelRepository.GetSingleModel(id, null);
+            var make = vehicleModelService.GetSingleModel(id, null);
 
             if (make == null)
             {
@@ -138,19 +120,9 @@ namespace VehiclesProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id, int makeId)
         {            
-            try
-            {
-                vehicleModelRepository.Delete(id);
+            vehicleModelService.Delete(id);
                                 
-                return RedirectToAction("Details", "VehicleMake", new { id = makeId });
-            }
-            catch (DataException)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            return RedirectToAction("Details", "VehicleMake", new { id = makeId });         
         }
-
-       
-
     }
 }

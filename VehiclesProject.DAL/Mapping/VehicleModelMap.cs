@@ -26,7 +26,6 @@ namespace VehiclesProject.DAL.Mapping
             this.HasRequired(s => s.Make)
                     .WithMany(s => s.VehicleModels)
                     .HasForeignKey(s => s.MakeId);
-
         }
     }
 }

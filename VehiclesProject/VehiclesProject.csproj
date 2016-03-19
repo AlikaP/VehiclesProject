@@ -245,6 +245,14 @@
       <Project>{160c7bc1-6ea0-4683-9b51-66c5ff5417cd}</Project>
       <Name>VehiclesProject.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VehiclesProject.Service.Common\VehiclesProject.Service.Common.csproj">
+      <Project>{5d7c6875-4d50-4824-a8d1-29eef97301fd}</Project>
+      <Name>VehiclesProject.Service.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehiclesProject.Service\VehiclesProject.Service.csproj">
+      <Project>{c57de65d-80a2-4a68-a08d-562e35c5348d}</Project>
+      <Name>VehiclesProject.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

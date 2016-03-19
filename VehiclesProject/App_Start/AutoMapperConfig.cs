@@ -13,9 +13,7 @@ namespace VehiclesProject.App_Start
     {
         public static void RegisterMappings()
         {
-
-            VehiclesProject.Model.Mapping.AutoMapperMaps.Initialize();
-                        
+            VehiclesProject.Model.Mapping.AutoMapperMaps.Initialize();               
         }
     }
 }

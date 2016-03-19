@@ -18,6 +18,5 @@ namespace VehiclesProject.Repository.Common
          void Create(IVehicleModel model, int? id);
          void Edit(int? id, IVehicleModel updatedItem);
          void Delete(int? id);
-
     }
 }

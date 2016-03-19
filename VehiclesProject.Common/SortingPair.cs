@@ -6,8 +6,7 @@ using System.Web;
 namespace VehiclesProject.Common
 {
     public class SortingPair : ISortingPair
-    {
-        
+    {       
         public bool? Ascending { get; set; }
         
         public string OrderBy { get; set; }
@@ -17,8 +16,7 @@ namespace VehiclesProject.Common
             this.Ascending = ascending;
             this.OrderBy = orderBy;
         }
-
-        
+                
         public string GetSortExpression()
         {
             string sortExpression = null;
@@ -32,6 +30,5 @@ namespace VehiclesProject.Common
 
             return sortExpression;
         }
-        
     }
 }

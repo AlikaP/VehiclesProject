@@ -1,0 +1,13 @@
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\VehiclesProject.Service.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\VehiclesProject.Service.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\PagedList.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\PagedList.Mvc.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\VehiclesProject.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\VehiclesProject.Model.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\VehiclesProject.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\VehiclesProject.Model.Common.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\PagedList.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\bin\Debug\PagedList.Mvc.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\obj\Debug\VehiclesProject.Service.Common.csprojResolveAssemblyReference.cache
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\obj\Debug\VehiclesProject.Service.Common.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Service.Common\obj\Debug\VehiclesProject.Service.Common.pdb

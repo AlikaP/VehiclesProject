@@ -6,8 +6,7 @@ using System.Web;
 namespace VehiclesProject.Common
 {
     public class Sorting : ISorting
-    {
-               
+    {              
         public IList<ISortingPair> Sorters { get; }
         
         public Sorting(ISortingPair sortOrder)
@@ -15,8 +14,7 @@ namespace VehiclesProject.Common
             Sorters = new List<ISortingPair>();
             Sorters.Add(sortOrder);
         }
-
-
+        
         //public Func<T, string> GetSortingBy<T>(string sortingSwitch) where T : class
         //{
         //    Func<T, string> sort = null;
