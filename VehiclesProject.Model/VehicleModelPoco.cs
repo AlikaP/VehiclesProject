@@ -9,8 +9,8 @@ namespace VehiclesProject.Model
 {
     public class VehicleModelPoco : IVehicleModel
     {
-        public int Id { get; set; }
-        public int MakeId { get; set; }   //foreign key name = <navigation property name><primary key property name>
+        public Guid Id { get; set; }
+        public Guid MakeId { get; set; }   //foreign key name = <navigation property name><primary key property name>
 
         [Display(Name = "Model Name")]
         [Required]

@@ -8,8 +8,8 @@ namespace VehiclesProject.Model.Common
 {
     public interface IVehicleModel
     {
-         int Id { get; set; }
-         int MakeId { get; set; }        
+         Guid Id { get; set; }
+         Guid MakeId { get; set; }        
          string Name { get; set; }
          string Abrev { get; set; }
          IVehicleMake Make { get; set; }       

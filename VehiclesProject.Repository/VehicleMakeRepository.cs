@@ -28,164 +28,114 @@ namespace VehiclesProject.Repository
         
         public IPagedList<IVehicleMake> GetMakes(IFiltering filter, IPaging paging, ISorting sorting)
         {
-            try
-            {
-                //IFiltering filter = new Filtering(currentFilter, searchString);
-                var searchString = filter.SearchString;
-                //int pageSize = 5;
+            //IFiltering filter = new Filtering(currentFilter, searchString);
+            var searchString = filter.SearchString;
+            //int pageSize = 5;
 
-                //IPaging paging = new Paging(page, pageSize);
-                int pageNumber = paging.PageNumber;
-                int pageSize = paging.PageSize;
+            //IPaging paging = new Paging(page, pageSize);
+            int pageNumber = paging.PageNumber;
+            int pageSize = paging.PageSize;
             
-                //
-                var vehicleMakes = from m in context.VehicleMakes select m;
+            //
+            var vehicleMakes = from m in context.VehicleMakes select m;
 
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    vehicleMakes = vehicleMakes.Where(m => m.Name == searchString
-                                           || m.Abrev == searchString
-                                           || m.VehicleModels.Count(s => s.Name == searchString) > 0);
-                }
-                        
-                //
-                var sortedModel = Mapper.Map<List<VehicleMakePoco>>(vehicleMakes.OrderBy(sorting.Sorters.FirstOrDefault().GetSortExpression()).ToList());
- 
-                //IPaging paging = new Paging();
-                //var pagination = paging.SetPagination(currentFilter, searchString, page);
-                //searchString = pagination.Item1;
-                //int pageNumber = pagination.Item2;
-
-                //IFiltering filter = new Filtering();
-                //var filteredModel = filter.SearchMake(context, searchString);
-
-                //ISorting sort = new Sorting();
-                //var model = sort.SortingBy(filteredModel, "asc", m => m.Name);
-
-                return genericRepository.GetPagedList(sortedModel, pageSize, pageNumber);
-            }
-            catch (Exception e)
+            if (!String.IsNullOrEmpty(searchString))
             {
-                throw e;
+                vehicleMakes = vehicleMakes.Where(m => m.Name == searchString
+                                        || m.Abrev == searchString
+                                        || m.VehicleModels.Count(s => s.Name == searchString) > 0);
             }
+                        
+            //
+            var sortedModel = Mapper.Map<List<VehicleMakePoco>>(vehicleMakes.OrderBy(sorting.Sorters.FirstOrDefault().GetSortExpression()).ToList());
+ 
+            //IPaging paging = new Paging();
+            //var pagination = paging.SetPagination(currentFilter, searchString, page);
+            //searchString = pagination.Item1;
+            //int pageNumber = pagination.Item2;
+
+            //IFiltering filter = new Filtering();
+            //var filteredModel = filter.SearchMake(context, searchString);
+
+            //ISorting sort = new Sorting();
+            //var model = sort.SortingBy(filteredModel, "asc", m => m.Name);
+
+            return genericRepository.GetPagedList(sortedModel, pageSize, pageNumber);
         }
 
-        public IVehicleMake GetSingleMake(int? id, string includedModel, IFiltering filter)
+        public IVehicleMake GetSingleMake(Guid? id, string includedModel, IFiltering filter)
         {
-            try
+            if (includedModel != null)
             {
-                if (includedModel != null)
-                {
-                    var searchString = filter.SearchString;
+                var searchString = filter.SearchString;
                                                 
-                    if (!String.IsNullOrEmpty(searchString))
-                    {
-                        context.Configuration.LazyLoadingEnabled = false;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
 
-                        var vehicleMake = context.VehicleMakes.Select(m => m).Where(f => f.Id == id).SingleOrDefault();
-                        //var vehicleMake = context.VehicleMakes.Select(m => m).Where(f => f.Id == id).Where(m => m.VehicleModels.Count(s => s.Name == searchString) > 0).SingleOrDefault();
+                    var vehicleMake = context.VehicleMakes.Select(m => m).Where(f => f.Id == id).SingleOrDefault();
+                    //var vehicleMake = context.VehicleMakes.Select(m => m).Where(f => f.Id == id).Where(m => m.VehicleModels.Count(s => s.Name == searchString) > 0).SingleOrDefault();
 
-                        if (vehicleMake != null)
-                        {                       
-                            context.Entry(vehicleMake)
-                            .Collection(includedModel)
-                            .Query()
-                            .Where("Name=@0", searchString).Load();
+                    if (vehicleMake != null)
+                    {                       
+                        context.Entry(vehicleMake)
+                        .Collection(includedModel)
+                        .Query()
+                        .Where("Name=@0", searchString).Load();
 
-                            return Mapper.Map<VehicleMakePoco>(vehicleMake);
-                        }
-                        else if (vehicleMake == null)
-                        {   
-                            return Mapper.Map<VehicleMakePoco>(context.VehicleMakes.SingleOrDefault(item => item.Id == id));
-                        }
+                        return Mapper.Map<VehicleMakePoco>(vehicleMake);
                     }
-
-                    return Mapper.Map<VehicleMakePoco>(context.VehicleMakes.Include(includedModel).SingleOrDefault(item => item.Id == id));              
+                    else if (vehicleMake == null)
+                    {   
+                        return Mapper.Map<VehicleMakePoco>(context.VehicleMakes.SingleOrDefault(item => item.Id == id));
+                    }
                 }
-                else
-                {              
-                    return Mapper.Map<VehicleMakePoco>(context.VehicleMakes.SingleOrDefault(item => item.Id == id)); 
-                }
+                return Mapper.Map<VehicleMakePoco>(context.VehicleMakes.Include(includedModel).SingleOrDefault(item => item.Id == id));              
             }
-            catch (Exception e)
-            {
-                throw e;
+            else
+            {              
+                return Mapper.Map<VehicleMakePoco>(context.VehicleMakes.SingleOrDefault(item => item.Id == id)); 
             }
         }
 
         public void Create(IVehicleMake model)
         {
-            try
-            {
-                genericRepository.Create(Mapper.Map<VehicleMake>(model));
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            genericRepository.Create(Mapper.Map<VehicleMake>(model));
         }
 
-        public void Edit(int? id, IVehicleMake updatedItem)
+        public void Update(Guid? id, IVehicleMake updatedItem)
         {
-            try
-            {
-                var item = context.VehicleMakes.SingleOrDefault(p => p.Id == id);
+            var item = context.VehicleMakes.SingleOrDefault(p => p.Id == id);
 
-                genericRepository.Edit(item, Mapper.Map<VehicleMake>(updatedItem));
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            genericRepository.Update(item, Mapper.Map<VehicleMake>(updatedItem));
         }
 
-        public void Delete(int? id)
+        public void Delete(Guid? id)
         {
-            try
-            {
-                var model = context.VehicleMakes.SingleOrDefault(p => p.Id == id);  
+            var model = context.VehicleMakes.SingleOrDefault(p => p.Id == id);  
 
-                //context.VehicleModels.RemoveRange(context.VehicleModels.Where(x => x.MakeId == model.Id));
+            //context.VehicleModels.RemoveRange(context.VehicleModels.Where(x => x.MakeId == model.Id));
             
-                genericRepository.Delete(Mapper.Map<VehicleMake>(model));  //genericRepository.Delete<VehicleMake>(model);  ---> simplified    
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            genericRepository.Delete(Mapper.Map<VehicleMake>(model));  //genericRepository.Delete<VehicleMake>(model);  ---> simplified    
         }
               
         public int GetItemNum()
         {
-            try
-            {
-                return context.VehicleMakes.Count();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return context.VehicleMakes.Count();
         }
 
-        public int GetModelNum(int? id)
+        public int GetModelNum(Guid? id)
         {
-            try
-            {
-                //context.Configuration.LazyLoadingEnabled = false;
+            //context.Configuration.LazyLoadingEnabled = false;
 
-                var vehicleMakes = context.VehicleMakes.Select(m => m).Where(f => f.Id == id).SingleOrDefault();
-                var modelCount = context.Entry(vehicleMakes).Collection("VehicleModels").Query().Count();
+            var vehicleMakes = context.VehicleMakes.Select(m => m).Where(f => f.Id == id).SingleOrDefault();
+            var modelCount = context.Entry(vehicleMakes).Collection("VehicleModels").Query().Count();
 
-                //return context.VehicleModels.Where(p => p.MakeId == id).Count();
+            //return context.VehicleModels.Where(p => p.MakeId == id).Count();
 
-                //return vehicleMakes.VehicleModels.Count(); //filtered number
+            //return vehicleMakes.VehicleModels.Count(); //filtered number
 
-                return modelCount;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return modelCount;
         }
     }
 }

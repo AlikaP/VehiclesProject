@@ -9,7 +9,7 @@ namespace VehiclesProject.Model.Common
 {
     public interface IVehicleMake
     {
-        int Id { get; set; }
+        Guid Id { get; set; }
         string Name { get; set; }
         string Abrev { get; set; }
         ICollection<IVehicleModel> VehicleModels { get; set; }

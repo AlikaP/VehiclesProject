@@ -24,59 +24,33 @@ namespace VehiclesProject.Repository
 
         public virtual IPagedList<T> GetPagedList<T>(List<T> model, int pageSize, int pageNumber) where T : class //, IVehicle
         {
-            try
-            {
-                return model.ToPagedList(pageNumber, pageSize); //filteredModel.OrderBy(m => m.Name).ToPagedList(pageNumber, pageSize);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            var pagedList = model.ToPagedList(pageNumber, pageSize); 
+
+            return new StaticPagedList<T>(pagedList, pagedList.GetMetaData());
         }
        
-        public virtual void Edit<T>(T item, T updatedItem) where T : class
+        public virtual void Update<T>(T item, T updatedItem) where T : class
         {
-            try
-            {
-                DbEntityEntry dbEntityEntry = context.Entry(updatedItem);
+            DbEntityEntry dbEntityEntry = context.Entry(updatedItem);
             
-                if(item != null)
-                {
-                    context.Entry(item).State = EntityState.Detached;
-                }
-                dbEntityEntry.State = EntityState.Modified;
-                context.SaveChanges();
-            }
-            catch (Exception e)
+            if(item != null)
             {
-                throw e;
+                context.Entry(item).State = EntityState.Detached;
             }
+            dbEntityEntry.State = EntityState.Modified;
+            context.SaveChanges();           
         }
 
         public virtual void Create<T>(T model) where T : class
         {
-            try
-            {
-                context.Set<T>().Add(model);
-                context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            context.Set<T>().Add(model);
+            context.SaveChanges();
         }
 
         public virtual void Delete<T>(T item) where T : class
         {
-            try
-            {
-                context.Set<T>().Remove(item);
-                context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            context.Set<T>().Remove(item);
+            context.SaveChanges();           
         }
     }
 }

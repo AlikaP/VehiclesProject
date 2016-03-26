@@ -9,9 +9,9 @@ namespace VehiclesProject.Service.Common
 {
     public interface IVehicleModelService
     {
-        IVehicleModel GetSingleModel(int? id, string includedModel);
-        void Create(IVehicleModel model, int? id);
-        void Edit(int? id, IVehicleModel updatedItem);
-        void Delete(int? id);
+        IVehicleModel GetSingleModel(Guid? id, string includedModel);
+        void Create(IVehicleModel model, Guid? id);
+        void Update(Guid? id, IVehicleModel updatedItem);
+        void Delete(Guid? id);
     }
 }

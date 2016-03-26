@@ -26,86 +26,37 @@ namespace VehiclesProject.Service
 
         public IPagedList<IVehicleMake> GetMakes(IFiltering filter, IPaging paging, ISorting sorting)
         {
-            try
-            {
-                return vehicleMakeRepository.GetMakes(filter, paging, sorting);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return vehicleMakeRepository.GetMakes(filter, paging, sorting);
         }
 
-        public IVehicleMake GetSingleMake(int? id, string includedModel, IFiltering filter)
+        public IVehicleMake GetSingleMake(Guid? id, string includedModel, IFiltering filter)
         {
-            try
-            {
-                return vehicleMakeRepository.GetSingleMake(id, includedModel, filter);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return vehicleMakeRepository.GetSingleMake(id, includedModel, filter);
         }
 
         public void Create(IVehicleMake model)
         {
-            try
-            {
-                vehicleMakeRepository.Create(model);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            vehicleMakeRepository.Create(model);
         }
 
-        public void Edit(int? id, IVehicleMake updatedItem)
+        public void Update(Guid? id, IVehicleMake updatedItem)
         {
-            try
-            {
-                vehicleMakeRepository.Edit(id, updatedItem);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            vehicleMakeRepository.Update(id, updatedItem);        
         }
 
-        public void Delete(int? id)
+        public void Delete(Guid? id)
         {
-            try
-            {
-                vehicleMakeRepository.Delete(id);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            vehicleMakeRepository.Delete(id);
         }
 
         public int GetItemNum()
         {
-            try
-            {
-                return vehicleMakeRepository.GetItemNum();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return vehicleMakeRepository.GetItemNum();
         }
 
-        public int GetModelNum(int? id)
+        public int GetModelNum(Guid? id)
         {
-            try
-            {
-                return vehicleMakeRepository.GetModelNum(id);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return vehicleMakeRepository.GetModelNum(id);
         }
     }
 }

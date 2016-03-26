@@ -8,8 +8,8 @@ namespace VehiclesProject.DAL.Entities
 {
     public class VehicleModel
     {
-        public int Id { get; set; }
-        public int MakeId { get; set; }   //foreign key name = <navigation property name><primary key property name>
+        public Guid Id { get; set; }
+        public Guid MakeId { get; set; }   //foreign key name = <navigation property name><primary key property name>
 
         public string Name { get; set; }
 

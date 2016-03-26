@@ -27,50 +27,64 @@ namespace VehiclesProject.Controllers
         // GET: VehicleMakes
         public  ActionResult Index(string currentFilter, string searchString, int? pageNumber, int? pageSize, bool? sortOrder, string orderBy="Name")
         {
-            //sort
-            ViewBag.CurrentSortOrder = sortOrder;
-            ViewBag.CurrentSortParam = orderBy;
+            try
+            {
+                //sort
+                ViewBag.CurrentSortOrder = sortOrder;
+                ViewBag.CurrentSortParam = orderBy;
 
-            if (sortOrder == true)
-                ViewBag.SortOrder = false;
-            else if (sortOrder == false)
-                ViewBag.SortOrder = true;
-            else if (sortOrder == null)
+                if (sortOrder == true)
+                    ViewBag.SortOrder = false;
+                else if (sortOrder == false)
+                    ViewBag.SortOrder = true;
+                else if (sortOrder == null)
                 { ViewBag.SortOrder = false; sortOrder = true; }
 
-            ViewBag.NumItems = vehicleMakeService.GetItemNum();
-         
-            //search
-            if (searchString != null)
-                    ViewBag.CurrentFilter = searchString;
-            else
-                ViewBag.CurrentFilter = currentFilter;
+                ViewBag.NumItems = vehicleMakeService.GetItemNum();
 
-            var model = vehicleMakeService.GetMakes(new Filtering(currentFilter, searchString),
-                                                        new Paging(pageNumber, pageSize),
-                                                        new Sorting(new SortingPair(sortOrder, orderBy)));
-             
-            return View(model);
+                //search
+                if (searchString != null)
+                    ViewBag.CurrentFilter = searchString;
+                else
+                    ViewBag.CurrentFilter = currentFilter;
+
+                var model = vehicleMakeService.GetMakes(new Filtering(currentFilter, searchString),
+                                                            new Paging(pageNumber, pageSize),
+                                                            new Sorting(new SortingPair(sortOrder, orderBy)));
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
 
         // GET: VehicleMakes/Details/id
-        public ActionResult Details(int? id, string searchString)
-        {                        
+        public ActionResult Details(Guid? id, string searchString)
+        {          
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var vehicleMake = vehicleMakeService.GetSingleMake(id, "VehicleModels", new Filtering(null, searchString));
-            ViewBag.NumItems = vehicleMakeService.GetModelNum(id);
-            //ViewBag.NumItems = vehicleMake.VehicleModels.Count();
-
-            if (vehicleMake == null)
+            try
             {
-                return HttpNotFound();
-            }
+                var vehicleMake = vehicleMakeService.GetSingleMake(id, "VehicleModels", new Filtering(null, searchString));
+                ViewBag.NumItems = vehicleMakeService.GetModelNum(id);
+                //ViewBag.NumItems = vehicleMake.VehicleModels.Count();
 
-            return View(vehicleMake);           
+                if (vehicleMake == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(vehicleMake);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(500);
+            }          
         }
 
         // GET: VehicleMakes/Create
@@ -84,84 +98,116 @@ namespace VehiclesProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(VehicleMakePoco model)
-        {            
+        {           
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            vehicleMakeService.Create(model);
+            try
+            {
+                vehicleMakeService.Create(model);
 
-            return RedirectToAction("index");
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Unable to save changes, please try again");
+                return View(model);
+            }
         }
 
         // GET: VehicleMakes/Edit/id
         [HttpGet]
-        public ActionResult Edit(int? id)
-        {            
+        public ActionResult Edit(Guid? id)
+        {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleMakeService.GetSingleMake(id, null, null);
-
-            if (make == null)
+            try
             {
-                return HttpNotFound();
-            }
+                var make = vehicleMakeService.GetSingleMake(id, null, null);
 
-            return View(make);
+                if (make == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(make);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
 
         // POST: VehicleMakes/Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, VehicleMakePoco model)
-        {            
-            if (!ModelState.IsValid)
+        public ActionResult Edit(Guid? id, VehicleMakePoco model)
+        {
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                vehicleMakeService.Update(id, model);
+
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Unable to save changes, please try again");
                 return View(model);
-            }       
-
-            vehicleMakeService.Edit(id, model);
-
-            return RedirectToAction("index");
-
-            //catch (DataException)
-            //{
-            //    ModelState.AddModelError("", "Unable to save changes, please try again");
-            //    return View(model);
-            //}
+            }
         }
 
         // GET: VehicleMakes/Delete/id
         [HttpGet]
-        public ActionResult Delete(int? id)
-        {            
+        public ActionResult Delete(Guid? id)
+        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleMakeService.GetSingleMake(id, null, null);
-
-            if (make == null)
+            try
             {
-                return HttpNotFound();
+                var make = vehicleMakeService.GetSingleMake(id, null, null);
+
+                if (make == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(make);
             }
-            
-            return View(make);
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
 
         // POST: VehicleMakes/Delete/id
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
-        {            
-            vehicleMakeService.Delete(id);
+        public ActionResult DeleteConfirmed(Guid? id)
+        {
+            try
+            {
+                vehicleMakeService.Delete(id);
 
-            return RedirectToAction("index");
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }       
     }
 }

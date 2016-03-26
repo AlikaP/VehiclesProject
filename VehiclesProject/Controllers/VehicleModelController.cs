@@ -21,21 +21,28 @@ namespace VehiclesProject.Controllers
         //private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: VehicleModels/Details/id
-        public ActionResult Details(int? id)
+        public ActionResult Details(Guid? id)
         {      
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var vehicleModel = vehicleModelService.GetSingleModel(id, "Make");
+            try
+            { 
+                var vehicleModel = vehicleModelService.GetSingleModel(id, "Make");
 
-            if (vehicleModel == null)
-            {
-                return HttpNotFound();
+                if (vehicleModel == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(vehicleModel);
             }
-
-            return View(vehicleModel);
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
 
         // GET: VehicleModels/Create
@@ -48,81 +55,118 @@ namespace VehiclesProject.Controllers
         // POST: VehicleModels/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(VehicleModelPoco model, int? id)
+        public ActionResult Create(VehicleModelPoco model, Guid? id)
         {       
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            vehicleModelService.Create(model, id);
+            try
+            {
+                vehicleModelService.Create(model, id);
 
-            return RedirectToAction("Details", "VehicleMake", new { id });
+                return RedirectToAction("Details", "VehicleMake", new { id });
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Unable to save changes, please try again");
+                return View(model);
+            }
         }
 
         // GET: VehicleModels/Edit/id
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Guid? id)
         {                        
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleModelService.GetSingleModel(id, null);
-
-            if (make == null)
+            try
             {
-                return HttpNotFound();
-            }
+                var make = vehicleModelService.GetSingleModel(id, null);
 
-            return View(make);
+                if (make == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(make);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
 
         // POST: VehicleModels/Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, VehicleModelPoco model)
+        public ActionResult Edit(Guid id, VehicleModelPoco model)
         {           
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            vehicleModelService.Edit(id, model);
-                
-            var vehicleModel = vehicleModelService.GetSingleModel(id, null);     
+            try
+            {
+                vehicleModelService.Update(id, model);
 
-            return RedirectToAction("Details", "VehicleMake", new { id = vehicleModel.MakeId });
+                var vehicleModel = vehicleModelService.GetSingleModel(id, null);
+
+                return RedirectToAction("Details", "VehicleMake", new { id = vehicleModel.MakeId });
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Unable to save changes, please try again");
+                return View(model);
+            }
         }
 
         // GET: VehicleModels/Delete/id
         [HttpGet]
-        public ActionResult Delete(int? id, int? makeId)
+        public ActionResult Delete(Guid? id, Guid? makeId)
         {            
             if (id == null || makeId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var make = vehicleModelService.GetSingleModel(id, null);
-
-            if (make == null)
+            try
             {
-                return HttpNotFound();
-            }
+                var make = vehicleModelService.GetSingleModel(id, null);
 
-            return View(make);
+                if (make == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(make);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         // POST: VehicleModels/Delete/id
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id, int makeId)
-        {            
-            vehicleModelService.Delete(id);
-                                
-            return RedirectToAction("Details", "VehicleMake", new { id = makeId });         
+        public ActionResult DeleteConfirmed(Guid? id, Guid makeId)
+        {
+            try
+            {
+                vehicleModelService.Delete(id);
+
+                return RedirectToAction("Details", "VehicleMake", new { id = makeId });
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace VehiclesProject.Model
 {
     public class VehicleMakePoco : IVehicleMake
     {       
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Make Name")]
         [Required]

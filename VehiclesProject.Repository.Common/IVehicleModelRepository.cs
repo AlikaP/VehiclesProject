@@ -14,9 +14,9 @@ namespace VehiclesProject.Repository.Common
         //create overload
         //void Create(VehicleModel model, int? id);
 
-         IVehicleModel GetSingleModel(int? id, string includedModel);
-         void Create(IVehicleModel model, int? id);
-         void Edit(int? id, IVehicleModel updatedItem);
-         void Delete(int? id);
+         IVehicleModel GetSingleModel(Guid? id, string includedModel);
+         void Create(IVehicleModel model, Guid? id);
+         void Update(Guid? id, IVehicleModel updatedItem);
+         void Delete(Guid? id);
     }
 }

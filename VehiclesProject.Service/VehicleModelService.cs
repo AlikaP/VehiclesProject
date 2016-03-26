@@ -24,52 +24,24 @@ namespace VehiclesProject.Service
             this.vehicleModelRepository = new VehicleModelRepository();
         }
 
-        public IVehicleModel GetSingleModel(int? id, string includedModel)
+        public IVehicleModel GetSingleModel(Guid? id, string includedModel)
         {
-            try
-            {
-                return vehicleModelRepository.GetSingleModel(id, includedModel);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return vehicleModelRepository.GetSingleModel(id, includedModel);          
         }
 
-        public void Create(IVehicleModel model, int? id)
+        public void Create(IVehicleModel model, Guid? id)
         {
-            try
-            {
-                vehicleModelRepository.Create(model, id);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            vehicleModelRepository.Create(model, id);          
         }
 
-        public void Edit(int? id, IVehicleModel updatedItem)
+        public void Update(Guid? id, IVehicleModel updatedItem)
         {
-            try
-            {
-                vehicleModelRepository.Edit(id, updatedItem);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            vehicleModelRepository.Update(id, updatedItem);
         }
 
-        public void Delete(int? id)
+        public void Delete(Guid? id)
         {
-            try
-            {
-                vehicleModelRepository.Delete(id);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            vehicleModelRepository.Delete(id);         
         }
     }
 }
