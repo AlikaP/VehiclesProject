@@ -3,3 +3,7 @@ C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProj
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\obj\Debug\VehiclesProject.Model.Common.dll
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\obj\Debug\VehiclesProject.Model.Common.pdb
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\obj\Debug\VehiclesProject.Model.Common.csprojResolveAssemblyReference.cache
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\bin\Debug\PagedList.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\bin\Debug\PagedList.Mvc.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\bin\Debug\PagedList.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model.Common\bin\Debug\PagedList.Mvc.xml

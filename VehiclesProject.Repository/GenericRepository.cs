@@ -15,12 +15,14 @@ namespace VehiclesProject.Repository
 {
     public class GenericRepository  : IGenericRepository  
     {
-        private VehicleContext context;
+        //private VehicleContext context;
 
-        public GenericRepository(VehicleContext context)
-        {
-            this.context = context;      
-        }
+        private VehicleContext context = new VehicleContext();
+
+        //public GenericRepository(VehicleContext context)
+        //{
+        //    this.context = context;      
+        //}
 
         public virtual IPagedList<T> GetPagedList<T>(List<T> model, int pageSize, int pageNumber) where T : class //, IVehicle
         {
@@ -51,6 +53,16 @@ namespace VehiclesProject.Repository
         {
             context.Set<T>().Remove(item);
             context.SaveChanges();           
+        }
+
+        public virtual IQueryable<T> GetSet<T>() where T : class
+        {
+            return context.Set<T>();
+        }
+
+        public virtual VehicleContext GetContext()
+        {
+            return context;
         }
     }
 }

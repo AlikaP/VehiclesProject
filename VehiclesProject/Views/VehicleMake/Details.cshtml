@@ -1,5 +1,8 @@
 ﻿@model VehiclesProject.Model.VehicleMakePoco
 
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 @{
     ViewBag.Title = "Details";
 }
@@ -7,13 +10,9 @@
 <br />
 <h2>Details</h2>
 
-@using (Html.BeginForm("Details", "VehicleMake", FormMethod.Get))
-{
-    <p>
-        Find model: @Html.TextBox("searchString")
-        <input type="submit" value="Search" />
-    </p>
-}
+@* Search forma za pretraživanje Model-a. *@
+@*@using (Html.BeginForm("_VehicleModelList", "VehicleModel", FormMethod.Get))*@
+
 
 <div>
     <h4>Vehicle Make</h4>
@@ -44,6 +43,8 @@
         <dt>
             @Html.DisplayNameFor(model => model.VehicleModels)
         </dt>
+                
+        @*
 
         @if (ViewBag.NumItems != 0)
         {            
@@ -95,11 +96,28 @@
                     @Html.ActionLink("Create New Model", "Create", "VehicleModel", new { id = @Model.Id }, null)
                 </p>
             </dd>
-        }
-   
+        }*@
+        
+        
+
+        @* Lista modela. *@
+        <dd>
+            <p>
+                @Html.ActionLink("Create New Model", "Create", "VehicleModel", new { id = @Model.Id }, null)
+            </p>
+            <p>
+                @Html.Action("_VehicleModelList", "VehicleModel", new { makeId = Model.Id, orderBy = ViewBag.CurrentSortParam, sortOrder = ViewBag.CurrentSortOrder, currentFilter = ViewBag.CurrentFilter })
+            </p>
+        </dd>
+        
     </dl>
 
 </div>
+
+@*<br />
+Page @(Model.VehicleModels.PageCount < Model.VehicleModels.PageNumber ? 0 : Model.VehicleModels.PageNumber) of @Model.VehicleModels.PageCount
+@Html.PagedListPager(Model.VehicleModels, pageNumber => Url.Action("Details", new { pageNumber, orderBy = ViewBag.CurrentSortParam, sortOrder = ViewBag.CurrentSortOrder, currentFilter = ViewBag.CurrentFilter }))*@
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

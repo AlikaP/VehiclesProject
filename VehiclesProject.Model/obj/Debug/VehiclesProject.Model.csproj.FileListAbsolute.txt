@@ -11,3 +11,7 @@ C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProj
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\VehiclesProject.DAL.pdb
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\AutoMapper.xml
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\EntityFramework.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\PagedList.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\PagedList.Mvc.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\PagedList.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.Model\bin\Debug\PagedList.Mvc.xml

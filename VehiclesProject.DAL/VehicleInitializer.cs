@@ -10,25 +10,25 @@ namespace VehiclesProject.DAL
     public class VehicleInitializer : System.Data.Entity.DropCreateDatabaseAlways<VehicleContext>
     {
         protected override void Seed(VehicleContext context)
-        {         
-            //var vehicleMakes = new List<VehicleMake>
-            //{               
-            //    new VehicleMake{Name="Audi",Abrev="AUDI"},
-            //    new VehicleMake{Name="BMW",Abrev="BMW"},
-            //    new VehicleMake{Name="Chevrolet",Abrev="CHEW"},
-            //    new VehicleMake{Name="Ford",Abrev="FORD"},
-            //    new VehicleMake{Name="Buick",Abrev="BUIC"},
-            //    new VehicleMake{Name="Cadillac",Abrev="CADI"},
-            //    new VehicleMake{Name="Renault",Abrev="RENA"},
-            //    new VehicleMake{Name="Corvette",Abrev="CHEV"},
-            //    new VehicleMake{Name="Nissan",Abrev="NISS"},
-            //    new VehicleMake{Name="Kaiser",Abrev="KAIS"}
-                
+        {
+            var vehicleMakes = new List<VehicleMake>
+            {
+                new VehicleMake{Name="Audi",Abrev="AUDI"},
+                new VehicleMake{Name="BMW",Abrev="BMW"},
+                new VehicleMake{Name="Chevrolet",Abrev="CHEW"},
+                new VehicleMake{Name="Ford",Abrev="FORD"},
+                new VehicleMake{Name="Buick",Abrev="BUIC"},
+                new VehicleMake{Name="Cadillac",Abrev="CADI"},
+                new VehicleMake{Name="Renault",Abrev="RENA"},
+                new VehicleMake{Name="Corvette",Abrev="CHEV"},
+                new VehicleMake{Name="Nissan",Abrev="NISS"},
+                new VehicleMake{Name="Kaiser",Abrev="KAIS"}
 
-            //};
 
-            //vehicleMakes.ForEach(s => context.VehicleMakes.Add(s));
-            //context.SaveChanges();
+            };
+
+            vehicleMakes.ForEach(s => context.VehicleMakes.Add(s));
+            context.SaveChanges();
 
             //var vehicleModels = new List<VehicleModel>
             //{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace VehiclesProject.DAL.Mapping
 
             // Table & Column Mappings
             this.ToTable("VehicleMake");
-            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Abrev).HasColumnName("Abrev");
         }

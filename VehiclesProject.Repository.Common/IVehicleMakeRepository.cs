@@ -14,11 +14,11 @@ namespace VehiclesProject.Repository.Common
     public interface IVehicleMakeRepository
     {
         IPagedList<IVehicleMake> GetMakes(IFiltering filter, IPaging paging, ISorting sorting);
-        IVehicleMake GetSingleMake(Guid? id, string includedModel, IFiltering filter);
+        IVehicleMake GetSingleMake(Guid id, string includedModel);
         void Create(IVehicleMake model);
-        void Update(Guid? id, IVehicleMake updatedItem);
-        void Delete(Guid? id);
+        void Update(Guid id, IVehicleMake updatedItem);
+        void Delete(Guid id);
         int GetItemNum();
-        int GetModelNum(Guid? id);
+        //int GetModelNum(Guid id);
     }
 }

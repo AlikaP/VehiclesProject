@@ -25,11 +25,11 @@ namespace VehiclesProject.Controllers
         IVehicleMakeService vehicleMakeService = new VehicleMakeService();
 
         // GET: VehicleMakes
-        public  ActionResult Index(string currentFilter, string searchString, int? pageNumber, int? pageSize, bool? sortOrder, string orderBy="Name")
+        public ActionResult Index(string currentFilter, string searchString, int? pageNumber, int? pageSize, bool? sortOrder, string orderBy="Name")
         {
             try
             {
-                //sort
+                // Sorting.
                 ViewBag.CurrentSortOrder = sortOrder;
                 ViewBag.CurrentSortParam = orderBy;
 
@@ -38,11 +38,14 @@ namespace VehiclesProject.Controllers
                 else if (sortOrder == false)
                     ViewBag.SortOrder = true;
                 else if (sortOrder == null)
-                { ViewBag.SortOrder = false; sortOrder = true; }
+                {
+                    ViewBag.SortOrder = false;
+                    sortOrder = true;
+                }
 
                 ViewBag.NumItems = vehicleMakeService.GetItemNum();
 
-                //search
+                // Search.
                 if (searchString != null)
                     ViewBag.CurrentFilter = searchString;
                 else
@@ -61,7 +64,7 @@ namespace VehiclesProject.Controllers
         }
 
         // GET: VehicleMakes/Details/id
-        public ActionResult Details(Guid? id, string searchString)
+        public ActionResult Details(Guid id, string searchString, int? pageNumber, int? pageSize)
         {          
             if (id == null)
             {
@@ -70,9 +73,9 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                var vehicleMake = vehicleMakeService.GetSingleMake(id, "VehicleModels", new Filtering(null, searchString));
-                ViewBag.NumItems = vehicleMakeService.GetModelNum(id);
-                //ViewBag.NumItems = vehicleMake.VehicleModels.Count();
+                var vehicleMake = vehicleMakeService.GetSingleMake(id, "VehicleModels");
+                //ViewBag.NumItems = vehicleMakeService.GetModelNum(id);
+                ////ViewBag.NumItems = vehicleMake.VehicleModels.Count();
 
                 if (vehicleMake == null)
                 {
@@ -119,7 +122,7 @@ namespace VehiclesProject.Controllers
 
         // GET: VehicleMakes/Edit/id
         [HttpGet]
-        public ActionResult Edit(Guid? id)
+        public ActionResult Edit(Guid id)
         {
             
             if (id == null)
@@ -129,7 +132,7 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                var make = vehicleMakeService.GetSingleMake(id, null, null);
+                var make = vehicleMakeService.GetSingleMake(id, null);
 
                 if (make == null)
                 {
@@ -147,7 +150,7 @@ namespace VehiclesProject.Controllers
         // POST: VehicleMakes/Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Guid? id, VehicleMakePoco model)
+        public ActionResult Edit(Guid id, VehicleMakePoco model)
         {
             try
             {
@@ -169,7 +172,7 @@ namespace VehiclesProject.Controllers
 
         // GET: VehicleMakes/Delete/id
         [HttpGet]
-        public ActionResult Delete(Guid? id)
+        public ActionResult Delete(Guid id)
         {
             if (id == null)
             {
@@ -178,7 +181,7 @@ namespace VehiclesProject.Controllers
 
             try
             {
-                var make = vehicleMakeService.GetSingleMake(id, null, null);
+                var make = vehicleMakeService.GetSingleMake(id, null);
 
                 if (make == null)
                 {
@@ -196,7 +199,7 @@ namespace VehiclesProject.Controllers
         // POST: VehicleMakes/Delete/id
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid? id)
+        public ActionResult DeleteConfirmed(Guid id)
         {
             try
             {

@@ -29,9 +29,9 @@ namespace VehiclesProject.Service
             return vehicleMakeRepository.GetMakes(filter, paging, sorting);
         }
 
-        public IVehicleMake GetSingleMake(Guid? id, string includedModel, IFiltering filter)
+        public IVehicleMake GetSingleMake(Guid id, string includedModel)
         {
-            return vehicleMakeRepository.GetSingleMake(id, includedModel, filter);
+            return vehicleMakeRepository.GetSingleMake(id, includedModel);
         }
 
         public void Create(IVehicleMake model)
@@ -39,12 +39,12 @@ namespace VehiclesProject.Service
             vehicleMakeRepository.Create(model);
         }
 
-        public void Update(Guid? id, IVehicleMake updatedItem)
+        public void Update(Guid id, IVehicleMake updatedItem)
         {
             vehicleMakeRepository.Update(id, updatedItem);        
         }
 
-        public void Delete(Guid? id)
+        public void Delete(Guid id)
         {
             vehicleMakeRepository.Delete(id);
         }
@@ -54,9 +54,9 @@ namespace VehiclesProject.Service
             return vehicleMakeRepository.GetItemNum();
         }
 
-        public int GetModelNum(Guid? id)
-        {
-            return vehicleMakeRepository.GetModelNum(id);
-        }
+        //public int GetModelNum(Guid id)
+        //{
+        //    return vehicleMakeRepository.GetModelNum(id);
+        //}
     }
 }

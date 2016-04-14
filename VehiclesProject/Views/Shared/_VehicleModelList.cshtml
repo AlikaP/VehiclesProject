@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<VehiclesProject.Model.VehicleModelPoco>
+
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    AjaxOptions ajaxOptions = new AjaxOptions { UpdateTargetId = "VehicleModelList", HttpMethod = "Get", InsertionMode = InsertionMode.Replace };
+}
+
+
+@if (ViewBag.NumItems != 0)
+{
+    <div id="VehicleModelList">
+
+        @using (Ajax.BeginForm("_VehicleModelList", new { makeId = ViewBag.MakeId }, ajaxOptions))
+        {
+            <p>
+                Find model: @Html.TextBox("searchString")
+                <input type="submit" value="Search" />
+            </p>
+        }
+
+        <table class="table">
+            <tr>
+                <th>
+                    Number of vehicle models: @ViewBag.NumItems
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Ajax.ActionLink("Model Name", "_VehicleModelList", new
+                    {
+                        makeId = ViewBag.MakeId,
+                        orderBy = "Name",
+                        sortOrder = ViewBag.SortOrder,
+                        currentFilter = ViewBag.CurrentFilter
+                    }, ajaxOptions)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Abrev)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Abrev)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "VehicleModel", new { id = item.Id }, null) |
+                        @Html.ActionLink("Details", "Details", "VehicleModel", new { id = item.Id }, null) |
+                        @Html.ActionLink("Delete", "Delete", "VehicleModel", new { id = item.Id, makeId = item.MakeId }, null)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, pageNumber => Url.Action("_VehicleModelList", new { makeId = ViewBag.MakeId, pageNumber, orderBy = ViewBag.CurrentSortParam, sortOrder = ViewBag.CurrentSortOrder, currentFilter = ViewBag.CurrentFilter }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxOptions))
+
+    </div>
+
+}
+else
+{
+    <dd>
+        <p>
+            There are currently no models for this vehicle make
+        </p>
+
+    </dd>
+}
+

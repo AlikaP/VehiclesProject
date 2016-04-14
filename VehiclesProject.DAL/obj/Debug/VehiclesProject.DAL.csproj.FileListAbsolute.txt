@@ -10,3 +10,7 @@ C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProj
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\obj\Debug\VehiclesProject.DAL.csprojResolveAssemblyReference.cache
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\obj\Debug\VehiclesProject.DAL.dll
 C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\obj\Debug\VehiclesProject.DAL.pdb
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\PagedList.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\PagedList.Mvc.dll
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\PagedList.xml
+C:\Users\Alen\Documents\Visual Studio 2015\Projects\VehiclesProject\VehiclesProject.DAL\bin\Debug\PagedList.Mvc.xml

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace VehiclesProject.Model.Mapping
             AutoMapper.Mapper.CreateMap<VehicleMake, VehicleMakePoco>().ReverseMap();
             AutoMapper.Mapper.CreateMap<VehicleMake, IVehicleMake>().ReverseMap();
             AutoMapper.Mapper.CreateMap<IVehicleMake, VehicleMakePoco>().ReverseMap();
-
+            
             AutoMapper.Mapper.CreateMap<VehicleModel, VehicleModelPoco>().ReverseMap();
             AutoMapper.Mapper.CreateMap<VehicleModel, IVehicleModel>().ReverseMap();
             AutoMapper.Mapper.CreateMap<IVehicleModel, VehicleModelPoco>().ReverseMap();

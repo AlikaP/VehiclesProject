@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VehiclesProject.DAL.Entities;
+using PagedList;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VehiclesProject.DAL.Mapping
 {
@@ -17,7 +19,7 @@ namespace VehiclesProject.DAL.Mapping
 
             // Table & Column Mappings
             this.ToTable("VehicleModel");
-            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
             this.Property(t => t.MakeId).HasColumnName("MakeId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Abrev).HasColumnName("Abrev");

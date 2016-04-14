@@ -16,7 +16,7 @@
 @using (Html.BeginForm("Index", "VehicleMake", FormMethod.Get))
 {
     <p>
-        Find model/make: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        Find make/model: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VehiclesProject.DAL;
 using VehiclesProject.DAL.Entities;
 using VehiclesProject.Model;
 
@@ -17,5 +18,7 @@ namespace VehiclesProject.Repository.Common
         void Create<T>(T model) where T : class;
         void Delete<T>(T item) where T : class;
         IPagedList<T> GetPagedList<T>(List<T> model, int pageSize, int pageNumber) where T : class; //, IVehicle;   
+        IQueryable<T> GetSet<T>() where T : class;
+        VehicleContext GetContext();
     }
 }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VehiclesProject.Common;
 using VehiclesProject.DAL;
 using VehiclesProject.Model.Common;
 using VehiclesProject.Repository;
@@ -24,24 +26,34 @@ namespace VehiclesProject.Service
             this.vehicleModelRepository = new VehicleModelRepository();
         }
 
-        public IVehicleModel GetSingleModel(Guid? id, string includedModel)
+        public IPagedList<IVehicleModel> GetModels(Guid makeId, IFiltering filter, IPaging paging, ISorting sorting)
+        {
+            return vehicleModelRepository.GetModels(makeId, filter, paging, sorting);
+        }
+
+        public IVehicleModel GetSingleModel(Guid id, string includedModel)
         {
             return vehicleModelRepository.GetSingleModel(id, includedModel);          
         }
 
-        public void Create(IVehicleModel model, Guid? id)
+        public void Create(IVehicleModel model, Guid id)
         {
             vehicleModelRepository.Create(model, id);          
         }
 
-        public void Update(Guid? id, IVehicleModel updatedItem)
+        public void Update(Guid id, IVehicleModel updatedItem)
         {
             vehicleModelRepository.Update(id, updatedItem);
         }
 
-        public void Delete(Guid? id)
+        public void Delete(Guid id)
         {
             vehicleModelRepository.Delete(id);         
+        }
+
+        public int GetModelNum(Guid id)
+        {
+            return vehicleModelRepository.GetModelNum(id);
         }
     }
 }
