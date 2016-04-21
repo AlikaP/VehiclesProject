@@ -8,13 +8,10 @@ namespace VehiclesProject.Common
 {
     public interface ISorting
     {
-        //IOrderedEnumerable<T> SortingBy<T>(IQueryable<T> filteredModel, string sortingSwitch, Func<T, string> order) where T : class;
-        // Func<T, string> GetSortingBy<T>(string sortingSwitch) where T : class, IVehicle;
-
         #region Properties
 
         /// <summary>
-        /// Gets the sort pairs.
+        /// Gets a list of sorting pairs.
         /// </summary>
         IList<ISortingPair> Sorters { get; }
 

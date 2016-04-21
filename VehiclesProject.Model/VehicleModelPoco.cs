@@ -9,17 +9,37 @@ namespace VehiclesProject.Model
 {
     public class VehicleModelPoco : IVehicleModel
     {
-        public Guid Id { get; set; }
-        public Guid MakeId { get; set; }   //foreign key name = <navigation property name><primary key property name>
+        #region Properites
 
+        /// <summary>
+        /// Gets or sets the vehicle model identifier.
+        /// </summary>
+        public Guid Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vehicle make foreign key.
+        /// </summary>
+        public Guid MakeId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the vehicle model.
+        /// </summary>
         [Display(Name = "Model Name")]
         [Required]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the abbrevation of the vehicle model's name.
+        /// </summary>
         [Display(Name = "Model Abbrevation")]
         [Required]
         public string Abrev { get; set; }
-        
-        public virtual IVehicleMake Make { get; set; }         //MakeId
+
+        /// <summary>
+        /// Gets or sets the navigation property to dependant vehicle make.
+        /// </summary>
+        public virtual IVehicleMake Make { get; set; }
+
+        #endregion Properites
     }
 }

@@ -14,17 +14,17 @@ namespace VehiclesProject.DAL.Mapping
     {
         public VehicleModelMap()
         {
-            // Primary Key
+            // Primary key.
             this.HasKey(t => t.Id);
 
-            // Table & Column Mappings
+            // Table & column Mappings.
             this.ToTable("VehicleModel");
             this.Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
             this.Property(t => t.MakeId).HasColumnName("MakeId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Abrev).HasColumnName("Abrev");
 
-            // Relationships
+            // Relationships.
             this.HasRequired(s => s.Make)
                     .WithMany(s => s.VehicleModels)
                     .HasForeignKey(s => s.MakeId);

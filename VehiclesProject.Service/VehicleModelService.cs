@@ -15,45 +15,89 @@ namespace VehiclesProject.Service
 {
     public class VehicleModelService : IVehicleModelService
     {
-        //private VehicleContext context;
+        #region Fields
+
         private IVehicleModelRepository vehicleModelRepository;
 
-        //private VehicleContext context = new VehicleContext();
+        #endregion Fields
+
+        #region Constructors
 
         public VehicleModelService()
         {
-            //this.context = context;
             this.vehicleModelRepository = new VehicleModelRepository();
         }
 
+        #endregion Constructors
+
+        #region Methods
+
+        /// <summary>
+        /// Gets paged list of all VehicleModels.
+        /// </summary>
+        /// <param name="makeId"></param>
+        /// <param name="filter"></param>
+        /// <param name="paging"></param>
+        /// <param name="sorting"></param>
+        /// <returns> Paged list of all VehicleModels. </returns>
         public IPagedList<IVehicleModel> GetModels(Guid makeId, IFiltering filter, IPaging paging, ISorting sorting)
         {
             return vehicleModelRepository.GetModels(makeId, filter, paging, sorting);
         }
 
+        /// <summary>
+        /// Gets a single VehicleModel entity.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="includedModel"></param>
+        /// <returns> A single VehicleModel entity. </returns>
         public IVehicleModel GetSingleModel(Guid id, string includedModel)
         {
             return vehicleModelRepository.GetSingleModel(id, includedModel);          
         }
 
+        /// <summary>
+        /// Updates a single VehicleModel entity.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public void Create(IVehicleModel model, Guid id)
         {
             vehicleModelRepository.Create(model, id);          
         }
 
+        /// <summary>
+        /// Updates a single VehicleModel entity.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedItem"></param>
+        /// <returns></returns>
         public void Update(Guid id, IVehicleModel updatedItem)
         {
             vehicleModelRepository.Update(id, updatedItem);
         }
 
+        /// <summary>
+        /// Deletes a single VehicleModel entity.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public void Delete(Guid id)
         {
             vehicleModelRepository.Delete(id);         
         }
 
+        /// <summary>
+        /// Gets a number of all VehicleModel entities.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public int GetModelNum(Guid id)
         {
             return vehicleModelRepository.GetModelNum(id);
         }
+
+        #endregion Methods
     }
 }

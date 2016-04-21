@@ -13,6 +13,7 @@ namespace VehiclesProject.App_Start
     {
         public static void RegisterMappings()
         {
+            // Initializes the all AutoMapper maps 
             VehiclesProject.Model.Mapping.AutoMapperMaps.Initialize();               
         }
     }

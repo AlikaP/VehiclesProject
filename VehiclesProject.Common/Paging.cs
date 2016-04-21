@@ -7,9 +7,21 @@ namespace VehiclesProject.Common
 {
     public class Paging : IPaging
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets the Page number.
+        /// </summary>
         public int PageNumber { get; }
-        
+
+        /// <summary>
+        /// Gets the Page size.
+        /// </summary>
         public int PageSize { get; }
+
+        #endregion Properties
+
+        #region Constructors
 
         public Paging(int? pageNumber, int? pageSize)
         {
@@ -17,10 +29,8 @@ namespace VehiclesProject.Common
             this.PageSize = (pageSize ?? 5);
         }
 
-        //public int GetPage(int? page)
-        //{
-        //    return (page ?? 1);
-        //}
-        
+        #endregion Constructors
+
+
     }
 }

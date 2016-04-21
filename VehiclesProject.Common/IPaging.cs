@@ -8,8 +8,6 @@ namespace VehiclesProject.Common
 {
     public interface IPaging
     {
-        //Tuple<string, int> SetPagination(string currentFilter, string searchString, int? page);
-
         #region Properties
 
         /// <summary>

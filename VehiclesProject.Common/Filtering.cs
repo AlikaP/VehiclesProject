@@ -7,7 +7,16 @@ namespace VehiclesProject.Common
 {
     public class Filtering : IFiltering
     {
-        public string SearchString{get; set;}
+        #region Properties
+
+        /// <summary>
+        /// Gets and sets the search input.
+        /// </summary>
+        public string SearchString { get; set;}
+
+        #endregion Properties
+
+        #region Constructors
 
         public Filtering(string currentFilter, string searchString)
         {
@@ -19,16 +28,7 @@ namespace VehiclesProject.Common
                 this.SearchString = searchString;
         }
 
-        //public string GetFilter(string searchString, string currentFilter)
-        //{
-
-        //    if(searchString == null)
-        //    {
-        //        searchString = currentFilter;
-        //    }
-
-        //    return searchString;
-        //}
+        #endregion Constructors
 
     }
 }

@@ -8,10 +8,13 @@ namespace VehiclesProject.Common
 {
     public interface IFiltering
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets and sets the search input.
+        /// </summary>
         string SearchString { get; set; }
 
-        //IQueryable<VehicleMake> SearchMake(VehicleContext context, string searchString);
-
-        //string GetFilter(string searchString, string currentFilter);
+        #endregion Properties
     }
 }

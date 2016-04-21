@@ -24,7 +24,6 @@ namespace VehiclesProject.DAL
                 new VehicleMake{Name="Nissan",Abrev="NISS"},
                 new VehicleMake{Name="Kaiser",Abrev="KAIS"}
 
-
             };
 
             vehicleMakes.ForEach(s => context.VehicleMakes.Add(s));

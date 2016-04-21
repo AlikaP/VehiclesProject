@@ -13,10 +13,10 @@ namespace VehiclesProject.DAL.Mapping
     {
         public VehicleMakeMap()
         {
-            // Primary Key
+            // Primary key.
             this.HasKey(t => t.Id);
 
-            // Table & Column Mappings
+            // Table & column Mappings.
             this.ToTable("VehicleMake");
             this.Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
             this.Property(t => t.Name).HasColumnName("Name");

@@ -6,47 +6,25 @@ using System.Web;
 namespace VehiclesProject.Common
 {
     public class Sorting : ISorting
-    {              
+    {
+        #region Properties
+
+        /// <summary>
+        /// Gets a list of sorting pairs.
+        /// </summary>
         public IList<ISortingPair> Sorters { get; }
-        
+
+        #endregion Properties
+
+        #region Constructors
+
         public Sorting(ISortingPair sortOrder)
         {
             Sorters = new List<ISortingPair>();
             Sorters.Add(sortOrder);
         }
-        
-        //public Func<T, string> GetSortingBy<T>(string sortingSwitch) where T : class
-        //{
-        //    Func<T, string> sort = null;
 
-        //    switch (sortingSwitch)
-        //    {
-        //        case "name":
-        //            sort = m=>m.Name;
-        //            break;
-        //        case "abrev":
-        //            sort = m=>m.Abrev;
-        //            break;
-        //    }
+        #endregion Constructors
 
-        //    return sort;
-        //}
-
-        //public IOrderedEnumerable<T> SortingBy<T>(IQueryable<T> filteredModel, string sortingSwitch, Func<T, string> order) where T : class
-        //{
-        //    IOrderedEnumerable<T> sortedModel = null;
-
-        //    switch (sortingSwitch)
-        //    {
-        //        case "asc":
-        //            sortedModel = filteredModel.OrderBy(order);
-        //            break;
-        //        case "desc":
-        //            sortedModel = filteredModel.OrderByDescending(order);
-        //            break;
-        //    }
-
-        //    return sortedModel;
-        //}
     }
 }

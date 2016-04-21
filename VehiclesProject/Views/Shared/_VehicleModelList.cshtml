@@ -15,7 +15,7 @@
         @using (Ajax.BeginForm("_VehicleModelList", new { makeId = ViewBag.MakeId }, ajaxOptions))
         {
             <p>
-                Find model: @Html.TextBox("searchString")
+                Find model: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
                 <input type="submit" value="Search" />
             </p>
         }

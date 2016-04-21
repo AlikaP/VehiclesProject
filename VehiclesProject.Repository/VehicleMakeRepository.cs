@@ -16,28 +16,42 @@ using VehiclesProject.DAL.Entities;
 namespace VehiclesProject.Repository
 {
     public class VehicleMakeRepository :  IVehicleMakeRepository
-    {      
+    {
+        #region Fields
+
         private IGenericRepository genericRepository;
 
-        //private VehicleContext context = new VehicleContext();
+        #endregion Fields
+
+        #region Constructors
 
         public VehicleMakeRepository()
         {
             this.genericRepository = new GenericRepository();    
         }
-        
+
+        #endregion Constructors
+
+        #region Methods
+
+        /// <summary>
+        /// Gets paged list of all VehicleMakes.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="paging"></param>
+        /// <param name="sorting"></param>
+        /// <returns> A paged list of makes. </returns>
         public IPagedList<IVehicleMake> GetMakes(IFiltering filter, IPaging paging, ISorting sorting)
         {
-            //IFiltering filter = new Filtering(currentFilter, searchString);
+            // Gets the search input.
             var searchString = filter.SearchString;
-            //int pageSize = 5;
 
-            //IPaging paging = new Paging(page, pageSize);
+            // Gets the number and size of a page.
             int pageNumber = paging.PageNumber;
             int pageSize = paging.PageSize;
             
-            //
-            var vehicleMakes = from m in genericRepository.GetSet<VehicleMake>() select m;
+            // Gets the VehicleMakes by search string
+            var vehicleMakes = genericRepository.GetSet<VehicleMake>();
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -45,76 +59,46 @@ namespace VehiclesProject.Repository
                                         || m.Abrev == searchString
                                         || m.VehicleModels.Count(s => s.Name == searchString) > 0);
             }
+
+            // Sorts the filtered list of makes.
+            var sortedModel = vehicleMakes.OrderBy(sorting.Sorters.FirstOrDefault().GetSortExpression()).Select(m=>m);
+
+            // Gets the paged list by parameters and maps it to corresponding type.
+            var pagedList = genericRepository.GetPagedList(sortedModel, pageSize, pageNumber);
                         
-            //
-            var sortedModel = Mapper.Map<List<VehicleMakePoco>>(vehicleMakes.OrderBy(sorting.Sorters.FirstOrDefault().GetSortExpression()).ToList());
- 
-            //IPaging paging = new Paging();
-            //var pagination = paging.SetPagination(currentFilter, searchString, page);
-            //searchString = pagination.Item1;
-            //int pageNumber = pagination.Item2;
+            IEnumerable<VehicleMakePoco> sourceList = Mapper.Map<IEnumerable<VehicleMake>, IEnumerable<VehicleMakePoco>>(pagedList);
 
-            //IFiltering filter = new Filtering();
-            //var filteredModel = filter.SearchMake(context, searchString);
-
-            //ISorting sort = new Sorting();
-            //var model = sort.SortingBy(filteredModel, "asc", m => m.Name);
-
-            return genericRepository.GetPagedList(sortedModel, pageSize, pageNumber);
+            return new StaticPagedList<VehicleMakePoco>(sourceList, pagedList.GetMetaData());
+            
         }
 
+        /// <summary>
+        /// Gets a single VehicleMake entity.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="includedModel"></param>
+        /// <returns> A single VehicleMake entity. </returns>
         public IVehicleMake GetSingleMake(Guid id, string includedModel)
-        {
-            //if (includedModel != null)
-            //{
-            //    var searchString = filter.SearchString;
-
-            //    int pageNumber = paging.PageNumber;
-            //    int pageSize = paging.PageSize;
-
-            //    if (!String.IsNullOrEmpty(searchString))
-            //    {
-            //        genericRepository.GetContext().Configuration.LazyLoadingEnabled = false;
-
-            //        var vehicleMake = genericRepository.GetSet<VehicleMake>().Select(m => m).Where(f => f.Id == id).SingleOrDefault();  
-            //        //var vehicleMake = context.VehicleMakes.Select(m => m).Where(f => f.Id == id).Where(m => m.VehicleModels.Count(s => s.Name == searchString) > 0).SingleOrDefault();
-
-            //        if (vehicleMake != null)
-            //        {
-            //            // Explicit loading of VehicleModel collection.
-            //            genericRepository.GetContext().Entry(vehicleMake)
-            //            .Collection(includedModel)
-            //            .Query()
-            //            .Where("Name=@0", searchString).Load();
-                                                
-            //            var vehMake = Mapper.Map<VehicleMakePoco>(vehicleMake);
-
-            //            //var vm = vehMake.VehicleModels.ToList();
-
-            //            //var a = genericRepository.GetPagedList(vm, pageSize, pageNumber);
-
-            //            vehMake.VehicleModels = vehMake.VehicleModels.ToPagedList(pageNumber, pageSize);
-
-            //            return vehMake;
-            //        }
-            //        else if (vehicleMake == null)
-            //        {   
-            //            return Mapper.Map<VehicleMakePoco>(genericRepository.GetSet<VehicleMake>().SingleOrDefault(item => item.Id == id));
-            //        }
-            //    }
-            //    return Mapper.Map<VehicleMakePoco>(genericRepository.GetSet<VehicleMake>().Include(includedModel).SingleOrDefault(item => item.Id == id));              
-            //}
-            //else
-            //{              
-                return Mapper.Map<VehicleMakePoco>(genericRepository.GetSet<VehicleMake>().SingleOrDefault(item => item.Id == id)); 
-            //}
+        {                        
+            return Mapper.Map<VehicleMakePoco>(genericRepository.GetSet<VehicleMake>().SingleOrDefault(item => item.Id == id));           
         }
 
+        /// <summary>
+        /// Creates new VehicleMake entity.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public void Create(IVehicleMake model)
         {
             genericRepository.Create(Mapper.Map<VehicleMake>(model));
         }
 
+        /// <summary>
+        /// Updates a single VehicleMake entity.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedItem"></param>
+        /// <returns></returns>
         public void Update(Guid id, IVehicleMake updatedItem)
         {
             var item = genericRepository.GetSet<VehicleMake>().SingleOrDefault(p => p.Id == id);
@@ -122,32 +106,27 @@ namespace VehiclesProject.Repository
             genericRepository.Update(item, Mapper.Map<VehicleMake>(updatedItem));
         }
 
+        /// <summary>
+        /// Deletes a single VehicleMake entity.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public void Delete(Guid id)
         {
             var model = genericRepository.GetSet<VehicleMake>().SingleOrDefault(p => p.Id == id);  
-
-            //context.VehicleModels.RemoveRange(context.VehicleModels.Where(x => x.MakeId == model.Id));
             
-            genericRepository.Delete(Mapper.Map<VehicleMake>(model));  //genericRepository.Delete<VehicleMake>(model);  ---> simplified    
+            genericRepository.Delete(Mapper.Map<VehicleMake>(model));  
         }
-              
+
+        /// <summary>
+        /// Gets a number of all VehicleMake entities.
+        /// </summary>
+        /// <returns> Number of makes. </returns>
         public int GetItemNum()
         {
             return genericRepository.GetSet<VehicleMake>().Count();
         }
 
-        //public int GetModelNum(Guid id)
-        //{
-        //    //context.Configuration.LazyLoadingEnabled = false;
-
-        //    var vehicleMakes = genericRepository.GetSet<VehicleMake>().Select(m => m).Where(f => f.Id == id).SingleOrDefault();
-        //    var modelCount = genericRepository.GetContext().Entry(vehicleMakes).Collection("VehicleModels").Query().Count();
-
-        //    //return context.VehicleModels.Where(p => p.MakeId == id).Count();
-
-        //    //return vehicleMakes.VehicleModels.Count(); //filtered number
-
-        //    return modelCount;
-        //}
+        #endregion Methods
     }
 }
